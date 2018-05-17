@@ -1,0 +1,119 @@
+﻿<Window x:Class="WpfMHilfer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMHilfer"
+        xmlns:view="clr-namespace:WpfMHilfer.view"
+        mc:Ignorable="d"
+        Title="MainWindow" >
+    <Window.Resources>
+
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid x:Name="MainPanel" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="0" >
+            <DockPanel x:Name="MenuDockPanel" LastChildFill="False" >
+                <DockPanel DockPanel.Dock="Top" >
+                    <Grid x:Name="HeaderGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Return" Content ="Return" Grid.Column="0" Tag="{Binding ParentElement}" >
+                            <Button.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter=""/>
+                            </Button.InputBindings>
+                        </Button>
+                        <Label x:Name="ParentLabel" Content="{Binding Path=ParentElement.name}"
+                             Grid.Column="1"/>
+                    </Grid>
+                </DockPanel>
+
+                <Grid DockPanel.Dock="Bottom" Height="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Add" Content="ADD" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,3,0"  VerticalAlignment="Center" 
+                            Click="addNewElement"
+                            Style="{StaticResource CircleButtonStyle}"></Button>
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <Button Content="Load" Click="LocalLoad"></Button>
+                        <Button Content="Save" Click="LocalSave"></Button>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel x:Name="TableStackPanel"  Visibility="Visible" 
+                            HorizontalAlignment="Stretch" 
+                            DataContext="{Binding Path=ListView, Mode=TwoWay}"
+                            Width="{Binding ActualWidth , ElementName=MenuDockPanel}">
+                    <ListView x:Name="NamesListView"  ItemsSource="{Binding Names}" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Button Content="{Binding}"  
+                                            Width="{Binding 
+                                        Converter={StaticResource PercentageConverter},
+                                        ElementName=TableStackPanel,
+                                        Path=ActualWidth,
+                                        ConverterParameter=0.95}"
+                                            HorizontalAlignment="Center" 
+                                            HorizontalContentAlignment="Center" 
+                                            ContextMenuService.IsEnabled="False"
+                                            ContextMenuService.ShowOnDisabled="True">
+                                        <Button.InputBindings>
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.DoubleClickCommand,
+                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid, AncestorLevel=2}}"
+                                                          CommandParameter="{Binding}" />
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OneClickCommand,
+                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}"
+                                                          CommandParameter="{Binding}"/>
+                                            <MouseBinding Gesture="RightClick" Command="{Binding DataContext.LeftClickCommand,
+                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}" 
+                                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Button,AncestorLevel=1} }" >
+                                            </MouseBinding>
+                                        </Button.InputBindings>
+                                        <Button.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem Header="Delete"  Command="{Binding DataContext.DeleteCommand,
+                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}"
+                                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button,AncestorLevel=1}}" />
+                                            </ContextMenu>
+                                        </Button.ContextMenu>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+
+        <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                   TextAlignment="Center"
+                   Text="{Binding Path=Description, Mode=TwoWay}"
+                   >
+
+        </TextBlock>
+        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" Style="{StaticResource CircleButtonStyle}" Grid.Column="1">
+            <Button.InputBindings>
+                <MouseBinding Gesture="LeftClick" Command="{Binding EditButtonCommand}" CommandParameter="">
+                </MouseBinding>
+            </Button.InputBindings>
+        </Button>
+
+    </Grid>
+</Window>

@@ -1,0 +1,52 @@
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.exe.config
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.exe
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.pdb
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\EntityFramework.dll
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.dll
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\Newtonsoft.Json.dll
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\EntityFramework.xml
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.xml
+D:\work-space\WpfMHilfer\WpfMHilfer\bin\Debug\Newtonsoft.Json.xml
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csprojAssemblyReference.cache
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\MainWindow.g.cs
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\App.g.cs
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.cache
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.lref
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\MainWindow.baml
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.g.resources
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.Properties.Resources.resources
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.GenerateResource.cache
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CoreCompileInputs.cache
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CopyComplete
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.exe
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.pdb
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\AddElementWindow.g.cs
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\styles.baml
+D:\work-space\WpfMHilfer\WpfMHilfer\obj\Debug\AddElementWindow.baml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\WpfMHilfer.exe.config
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\WpfMHilfer.exe
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\WpfMHilfer.pdb
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\EntityFramework.dll
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\EntityFramework.xml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\AddElementWindow.g.cs
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\MainWindow.g.cs
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\App.g.cs
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.cache
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.lref
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\AddElementWindow.baml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\MainWindow.baml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\styles.baml
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.g.resources
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.Properties.Resources.resources
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.GenerateResource.cache
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CoreCompileInputs.cache
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CopyComplete
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.exe
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.pdb
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\App.baml
