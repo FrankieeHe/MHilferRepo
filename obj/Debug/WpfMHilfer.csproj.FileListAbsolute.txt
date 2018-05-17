@@ -50,3 +50,30 @@ C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.ex
 C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\WpfMHilfer.pdb
 C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\donghui.he\source\repos\Neuer Ordner\WpfMHilfer\obj\Debug\App.baml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.exe.config
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.exe
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\WpfMHilfer.pdb
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\EntityFramework.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\EntityFramework.xml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\AddElementWindow.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\MainWindow.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\App.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.cache
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer_MarkupCompile.lref
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\App.baml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\AddElementWindow.baml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\MainWindow.baml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\styles.baml
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.g.resources
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.Properties.Resources.resources
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.GenerateResource.cache
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CoreCompileInputs.cache
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.csproj.CopyComplete
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.exe
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\Debug\WpfMHilfer.pdb

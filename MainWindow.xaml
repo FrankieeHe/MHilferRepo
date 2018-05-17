@@ -72,7 +72,8 @@
                                             HorizontalAlignment="Center" 
                                             HorizontalContentAlignment="Center" 
                                             ContextMenuService.IsEnabled="False"
-                                            ContextMenuService.ShowOnDisabled="True">
+                                            ContextMenuService.ShowOnDisabled="True"
+                                            Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid, AncestorLevel=2}}">
                                         <Button.InputBindings>
                                             <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.DoubleClickCommand,
                                                 RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid, AncestorLevel=2}}"
@@ -86,9 +87,9 @@
                                             </MouseBinding>
                                         </Button.InputBindings>
                                         <Button.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem Header="Delete"  Command="{Binding DataContext.DeleteCommand,
-                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}"
+                                            <ContextMenu >
+                                                <MenuItem Header= "{Binding Path=PlacementTarget.Tag.DataContext.Description , RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                          Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
                                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button,AncestorLevel=1}}" />
                                             </ContextMenu>
                                         </Button.ContextMenu>
