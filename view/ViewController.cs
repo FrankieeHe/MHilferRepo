@@ -111,7 +111,7 @@ namespace WpfMHilfer.view
             ts.actTable = thistable;
             TableStep.nextStep = ts;
             this.TableStep = ts;
-            //due to the main table is changed to tablestep, this could be cryclus
+            //due to the main table is changed to tablestep, this could be circle
 
         }
 
