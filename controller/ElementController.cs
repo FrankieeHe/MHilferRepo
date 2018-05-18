@@ -73,7 +73,7 @@ namespace MHilfer.controller
 
         public Element findElement(string obj)
         {
-            return masterController.hilfer.elements.Where(e => e.name == obj).First();
+            return masterController.hilfer.elements.Find(e => e.name == obj);
         }
 
         public Relation subRelation(Element e)
@@ -96,45 +96,59 @@ namespace MHilfer.controller
         public Table subTable(Element e)
         {
             Relation subrelation = subRelation(e);
-            if(subrelation is null) { return null; }
+            if (subrelation is null) { return null; }
             return subrelation.table;
         }
 
         public Element getPreElement(Element e)
         {
-            string nam = preRelation(e) is null ? null: preRelation(e).table.name;
-            if(nam is "MainTable" || nam is null) { return null; }
+            string nam = preRelation(e) is null ? null : preRelation(e).table.name;
+            if (nam is "MainTable" || nam is null) { return null; }
             return findElement(nam);
         }
         public Relation preRelation(Element e)
         {
-            var selected = from rel in masterController.hilfer.relations
-                           where rel.element.name.Equals(e.name) && rel.leftOwnRight == false
-                           select rel;
-            List<Relation> relations = selected.ToList();
-            if (relations.Count() == 1) { return relations[0]; }
-            return null;
+            Relation prerelation = masterController.hilfer.relations.Find(rel => rel.element.Equals(e) && rel.leftOwnRight == false);
+            if (prerelation is null) { throw new Exception("preRelation catch null "); }
+            return prerelation;
         }
 
         public bool removeElement(Element e)
         {
-
+            //only the element on tail deletable
             if (subRelation(e) != null) { throw new Exception("cannot remove the Element which is with Table"); }
-            if (preRelation(e) != null)
+            Relation prerelation = preRelation(e);
+            Element parentele = getPreElement(e);
+            if (parentele == null && prerelation.table.stufe == 0)
             {
-                this.masterController.hilfer.relations.RemoveAll(r => preRelation(e).Equals(r));
+                this.masterController.hilfer.relations.RemoveAll(r => prerelation.Equals(r));
+                return masterController.hilfer.elements.Remove(e);
             }
+
+
+            Table thistable = masterController.elementController.subTable(parentele);
+            /***
+             * deleted element  get clearn
+             *                  subtable get clean
+             *                  relations from subtable get clearn 
+             *                  relation to subtable get clean == relation from element
+             *                  
+             ***/
+            if (masterController.tableController.allSubElements(thistable).Count() == 0)
+            {
+                //clean the subrelation of table 
+                this.masterController.hilfer.relations.RemoveAll(r => masterController.tableController.allSubRelations(thistable).Contains(r));
+                //relation of element to subtable
+                this.masterController.hilfer.relations.Remove(masterController.tableController.preRelation(thistable));
+
+            }
+
+            //prerelation
+            this.masterController.hilfer.relations.RemoveAll(r => prerelation.Equals(r));
+            //element
             return masterController.hilfer.elements.Remove(e);
         }
 
-        public bool cleanTableRelationOnElement(Element e)
-        {
-            if (subRelation(e) != null)
-            {
-                return this.masterController.hilfer.relations.Remove(subRelation(e));
-            }
 
-            return true;
-        }
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMHilfer"
         xmlns:view="clr-namespace:WpfMHilfer.view"
+        xmlns:converter="clr-namespace:WpfMHilfer.converter"
         mc:Ignorable="d"
         Title="MainWindow" >
     <Window.Resources>
@@ -13,7 +14,8 @@
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
+            <converter:BoolConverter x:Key="boolConverter"/>
+            <converter:ColorConverter x:Key="colorConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -31,9 +33,18 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Return" Content ="Return" Grid.Column="0" Tag="{Binding ParentElement}" >
+                        <Button x:Name="Return" Content ="Return" Grid.Column="0" 
+                                Tag="{Binding ParentElement}" 
+                                IsEnabled="{Binding Converter={StaticResource boolConverter},
+                            ElementName=MainPanel,
+                            Path=DataContext.TableStep.actTable.stufe, Mode=OneWay,
+                            ConverterParameter=0}" 
+                                Background="{Binding Converter={StaticResource colorConverter},
+                            ElementName=MainPanel,
+                            Path=DataContext.TableStep.actTable.stufe,Mode=OneWay,
+                            ConverterParameter=0 }" >
                             <Button.InputBindings>
-                                <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter=""/>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
                         <Label x:Name="ParentLabel" Content="{Binding Path=ParentElement.name}"
@@ -88,9 +99,9 @@
                                         </Button.InputBindings>
                                         <Button.ContextMenu>
                                             <ContextMenu >
-                                                <MenuItem Header= "{Binding Path=PlacementTarget.Tag.DataContext.Description , RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                <MenuItem Header= "Delete"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
-                                                          CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button,AncestorLevel=1}}" />
+                                                          CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />
                                             </ContextMenu>
                                         </Button.ContextMenu>
                                     </Button>

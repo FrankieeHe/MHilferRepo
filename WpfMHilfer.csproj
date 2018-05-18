@@ -67,11 +67,14 @@
     <Compile Include="AddElementWindow.xaml.cs">
       <DependentUpon>AddElementWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="converter\BoolConverter.cs" />
+    <Compile Include="converter\ColorConverter.cs" />
     <Compile Include="view\ComboBoxViewModel.cs" />
     <Compile Include="view\ListViewViewModel.cs" />
     <Compile Include="view\ObservableObject.cs" />
     <Compile Include="view\PercentageConverter.cs" />
     <Compile Include="view\RelayCommand.cs" />
+    <Compile Include="view\TableSteps.cs" />
     <Compile Include="view\ViewController.cs" />
     <Page Include="AddElementWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

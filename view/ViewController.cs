@@ -18,10 +18,8 @@ namespace WpfMHilfer.view
     public class ViewController : ObservableObject
     {
         private MasterController masterController { get; set; }
-        private List<Panel> panels;
         private Element _parentElement;
-        private Grid mainPanel;
-        private int[] zindexs;
+        private TableSteps _TableStep;
         private ListViewViewModel _ListView;
         private string _Description;
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
@@ -29,7 +27,7 @@ namespace WpfMHilfer.view
         public ICommand DoubleClickCommand { get; set; }
         public ICommand ReturenButtonCommand
         {
-            get { return new RelayCommand<string>(ReturenButtonAction); }
+            get { return new RelayCommand<object>(ReturenButtonAction); }
         }
         public ICommand EditButtonCommand
         {
@@ -44,6 +42,14 @@ namespace WpfMHilfer.view
         {
             get { return new RelayCommand<object>(DeleteCommandAction); }
         }
+        internal TableSteps TableStep
+        {
+            get { return this._TableStep; }
+            set { this._TableStep = value;
+                OnPropertyChanged("TableStep");
+            }
+        }
+ 
         public Element ParentElement
         {
             get
@@ -77,16 +83,19 @@ namespace WpfMHilfer.view
         {
             OneClickCommand = new RelayCommand<string>(ClickForDesc);
             DoubleClickCommand = new RelayCommand<string>(EntityUnfold);
+
         }
+
         public ViewController(MasterController mc) : this()
         {
             this.masterController = mc;
+            this.TableStep = new TableSteps();
+            this.TableStep.actTable = masterController.hilfer.tables.Find(t => t.stufe == 0);
         }
 
 
         private void ClickForDesc(string obj)
         {
-
             ParentElement = masterController.elementController.findElement(obj);
             Description = ParentElement.desc;
         }
@@ -95,18 +104,28 @@ namespace WpfMHilfer.view
         {
 
             ParentElement = masterController.elementController.findElement(obj);
+            Table thistable = masterController.elementController.subTable(ParentElement);
+            generateListViewNames(thistable);
+            TableSteps ts = new TableSteps();
+            ts.previousStep = TableStep;
+            ts.actTable = thistable;
+            TableStep.nextStep = ts;
+            this.TableStep = ts;
 
-            Table nexttable = masterController.elementController.subTable(ParentElement);
-            if (nexttable is null) { return; }
-            generateListViewNames(nexttable);
         }
 
-        private void ReturenButtonAction(string nix)
+        private void ReturenButtonAction(object sender)
         {
-            Element preElement = masterController.elementController.getPreElement(ParentElement);
-            this.ParentElement = preElement;
-            if(preElement is null) { generateListViewNames(null); return; }
-            generateListViewNames(masterController.tableController.getTablePerName(preElement.name));
+            if(TableStep.previousStep is null) { generateListViewNames(null);return; }
+            generateListViewNames(TableStep.previousStep.actTable);
+            this.TableStep = TableStep.previousStep;
+
+            //if (TableStep.previousStep == null)
+            //{
+            //    Button button = (Button)sender;
+            //    button.IsEnabled = false;
+            //    button.Background = Brushes.DimGray;
+            //}
         }
 
         private void EditButtonAction(string obj)
@@ -129,11 +148,21 @@ namespace WpfMHilfer.view
 
         private void DeleteCommandAction(object obj)
         {
-            Button button = (Button)obj;
-            string nam =(string)( button.Content);
-            Element ele = masterController.elementController.findElement(nam);
-            masterController.elementController.removeElement(ele);
-            generateListViewNames(masterController.elementController.preRelation(ele).table);
+            try
+            {
+                Button button = (Button)obj;
+                string nam = (string)(button.Content);
+                Element ele = masterController.elementController.findElement(nam);
+                Table t = masterController.elementController.preRelation(ele).table;
+                ParentElement = masterController.elementController.findElement(t.name);
+
+                masterController.elementController.removeElement(ele);
+                generateListViewNames(t);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public void generateListViewNames(Table table)
@@ -154,113 +183,6 @@ namespace WpfMHilfer.view
         }
 
 
-        public List<Button> new_buttons(List<Element> es)
-        {
-            var bs = from e in es
-                     select new_Button(e);
-            List<Button> buttons = bs.ToList<Button>();
-            return buttons;
-        }
-
-
-
-        /// <summary>
-        /// Add all Panels to their Columns 
-        /// the Columns is initialized according to the each Panel
-        /// zindex is here initialized by the number of columns
-        /// </summary>
-        public void addPanelsToColumn()
-        {
-            int column_index = 0;
-            bool more = true;
-            while (more)
-            {
-
-                var pns = from p in this.panels
-                          where p.FindName(column_index.ToString()) != null
-                          select p;
-                if (pns.Count() == 0) { more = false; break; }
-
-                List<Panel> column_panels = pns.ToList<Panel>();
-                ColumnDefinition columnDefinition = new ColumnDefinition();
-                columnDefinition.Name = "column" + column_index.ToString();
-                this.mainPanel.ColumnDefinitions.Add(columnDefinition);
-
-                foreach (Panel p in column_panels)
-                {
-                    Grid.SetColumn(p, column_index);
-                    this.mainPanel.Children.Add(p);
-                }
-                column_index += 1;
-            }
-            this.zindexs = new int[column_index];
-        }
-
-        public Button new_Button(Element ele)
-        {
-            string name = ele.name;
-            string desc = ele.desc;
-            Panel subPanel = new StackPanel();
-            if (masterController.elementController.subRelation(ele).table != null)
-            {
-                var subp = from p in this.panels
-                           where p.Name == masterController.elementController.subRelation(ele).table.name
-                           select p;
-                List<Panel> subPanels = subp.ToList<Panel>();
-                if (subPanels.Count > 1) { throw new Exception("table name duplicated in GUI panels"); }
-                subPanel = subPanels[0];
-            };
-            Button newBtn = new Button();
-            newBtn.Name = name;
-            newBtn.Content = name;
-            newBtn.Margin = new Thickness(10, 5, 10, 5);
-            newBtn.Background = Brushes.Blue;
-            newBtn.Click += (s, e) => { toggle_panel(s, subPanel); };
-
-            return newBtn;
-        }
-
-        /// <summary>
-        /// When others is already in the panel's Column showed 
-        /// this function firstly close the others and then show this one.
-        /// </summary>
-        /// <param name="parent">event dissolver button</param>
-        /// <param name="panel">the corresponding Panel, which to show or hidden</param>
-        public void toggle_panel(object parent, Panel panel)
-        {
-            Button btn = (Button)parent;
-            if (panel.Name == null)
-            {
-                return;
-            }
-            panel.HorizontalAlignment = HorizontalAlignment.Left;
-            if (panel.Visibility == Visibility.Visible)
-            {
-                panel.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                Table table = masterController.tableController.getTablePerName(panel.Name);
-                int column = table.stufe;
-                Grid mgrid = (Grid)(FrameworkElement)(panel).Parent;//function probe
-                if (mgrid != this.mainPanel) { throw new Exception("parent of the child panel is not MainPanel"); }
-                List<UIElement> uies = (List<UIElement>)(mgrid.Children.Cast<UIElement>().Where(p => Grid.GetColumn(p) == column));
-                foreach (UIElement u in uies)
-                {
-                    u.Visibility = Visibility.Collapsed;
-                }
-                panel.Visibility = Visibility.Visible;
-            }
-
-        }
-
-        public void hang_Buttons(Panel panel, List<Button> buttons)
-        {
-            foreach (Button b in buttons)
-            {
-                panel.Children.Add(b);
-            }
-        }
 
 
     }
