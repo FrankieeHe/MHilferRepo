@@ -5,6 +5,6 @@
              xmlns:view="clr-namespace:WpfMHilfer.view"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-            <view:PercentageConverter x:Key="PercentageConverter"/>
+        <view:PercentageConverter x:Key="PercentageConverter"/>
     </Application.Resources>
 </Application>

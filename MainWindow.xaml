@@ -31,20 +31,33 @@
                     <Grid x:Name="HeaderGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Return" Content ="Return" Grid.Column="0" 
-                                Tag="{Binding ParentElement}" 
-                                IsEnabled="{Binding Converter={StaticResource boolConverter},
-                            ElementName=MainPanel,
-                            Path=DataContext.TableStep.actTable.stufe, Mode=OneWay,
-                            ConverterParameter=0}" 
+                        <Button x:Name="Return" Content ="Return" Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                Tag="{Binding ParentElement}"  
                                 Background="{Binding Converter={StaticResource colorConverter},
                             ElementName=MainPanel,
                             Path=DataContext.TableStep.actTable.stufe,Mode=OneWay,
-                            ConverterParameter=0 }" >
+                            ConverterParameter=0 }" 
+                                Width="{Binding Converter={StaticResource PercentageConverter},
+                                        ElementName=HeaderGrid,
+                                        Path=ActualWidth,
+                                        ConverterParameter=0.235
+                            }">
                             <Button.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
+                            </Button.InputBindings>
+                        </Button>
+                        <Button x:Name="Next" Content="Next" Grid.Column="0"
+                                HorizontalAlignment="Right"
+                                Width="{Binding Converter={StaticResource PercentageConverter},
+                                        ElementName=HeaderGrid,
+                                        Path=ActualWidth,
+                                        ConverterParameter=0.235}">
+
+                            <Button.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding NextButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
                         <Label x:Name="ParentLabel" Content="{Binding Path=ParentElement.name}"
@@ -79,7 +92,7 @@
                                         Converter={StaticResource PercentageConverter},
                                         ElementName=TableStackPanel,
                                         Path=ActualWidth,
-                                        ConverterParameter=0.95}"
+                                        ConverterParameter=0.92}"
                                             HorizontalAlignment="Center" 
                                             HorizontalContentAlignment="Center" 
                                             ContextMenuService.IsEnabled="False"
@@ -99,9 +112,13 @@
                                         </Button.InputBindings>
                                         <Button.ContextMenu>
                                             <ContextMenu >
+                                                <MenuItem Header="Shift"
+                                                          Command="{Binding Path=PlacementTarget.Tag.DataContext.ShiftCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                          CommandParameter="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                                 <MenuItem Header= "Delete"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
                                                           CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />
+                                                
                                             </ContextMenu>
                                         </Button.ContextMenu>
                                     </Button>

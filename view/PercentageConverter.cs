@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace WpfMHilfer.view
 {
-    class PercentageConverter : IValueConverter
+    public class PercentageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

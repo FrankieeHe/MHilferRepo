@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-//TODO: the circle button and columns width to set and test function
+
 namespace WpfMHilfer.view
 {
     public class ViewController : ObservableObject
@@ -23,8 +23,20 @@ namespace WpfMHilfer.view
         private ListViewViewModel _ListView;
         private string _Description;
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
+        public ICommand ShiftCommand { get
+            {
+                return new RelayCommand<object>(ShiftCommandAction);
+            } }
+
+
         public ICommand OneClickCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
+        public ICommand NextButtonCommand { get
+            {
+                return new RelayCommand<object>(NextButtonAction);
+            } }
+
+
         public ICommand ReturenButtonCommand
         {
             get { return new RelayCommand<object>(ReturenButtonAction); }
@@ -45,11 +57,12 @@ namespace WpfMHilfer.view
         internal TableSteps TableStep
         {
             get { return this._TableStep; }
-            set { this._TableStep = value;
+            set
+            {
+                this._TableStep = value;
                 OnPropertyChanged("TableStep");
             }
         }
- 
         public Element ParentElement
         {
             get
@@ -105,21 +118,38 @@ namespace WpfMHilfer.view
 
             ParentElement = masterController.elementController.findElement(obj);
             Table thistable = masterController.elementController.subTable(ParentElement);
+            if (thistable is null) { return; }
             generateListViewNames(thistable);
-            TableSteps ts = new TableSteps();
-            ts.previousStep = TableStep;
-            ts.actTable = thistable;
-            TableStep.nextStep = ts;
-            this.TableStep = ts;
+
+            next_step(thistable);
             //due to the main table is changed to tablestep, this could be circle
 
         }
 
+        private void next_step(Table thistable)
+        {
+            TableSteps ts = new TableSteps();
+            ts.previousStep = TableStep;
+            ts.actTable = thistable;
+            
+            this.TableStep = ts;
+
+        }
+        private void prev_step()
+        {
+            if(TableStep.actTable.stufe == 0)
+            {
+                return;
+            }
+            TableSteps ts = this.TableStep;
+            this.TableStep = this.TableStep.previousStep;
+
+        }
         private void ReturenButtonAction(object sender)
         {
-            if(TableStep.previousStep is null) { generateListViewNames(null);return; }
+            if (TableStep.previousStep is null) { generateListViewNames(null); return; }
             generateListViewNames(TableStep.previousStep.actTable);
-            this.TableStep = TableStep.previousStep;
+            prev_step();
 
             //if (TableStep.previousStep == null)
             //{
@@ -143,9 +173,8 @@ namespace WpfMHilfer.view
             button.ContextMenu.PlacementTarget = button;
             button.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
             button.ContextMenu.IsOpen = true;
-
-
         }
+
 
         private void DeleteCommandAction(object obj)
         {
@@ -164,6 +193,17 @@ namespace WpfMHilfer.view
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+
+        private void ShiftCommandAction(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NextButtonAction(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         public void generateListViewNames(Table table)

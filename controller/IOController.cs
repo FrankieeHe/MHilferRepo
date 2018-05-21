@@ -70,6 +70,7 @@ namespace MHilfer.controller
              new JProperty("tablesJson", JsonConvert.SerializeObject(this.masterController.hilfer.tables,Formatting.Indented)),
              new JProperty("relationsJson", JsonConvert.SerializeObject(this.masterController.hilfer.relations,Formatting.Indented)));
             SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "json";
             if (saveFileDialog.ShowDialog() == true)
             {
                 saveFileDialog.Filter = "JSON file (*.json)|*.json";
