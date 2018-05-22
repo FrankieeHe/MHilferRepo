@@ -23,18 +23,18 @@ namespace WpfMHilfer.view
         private ListViewViewModel _ListView;
         private string _Description;
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
-        public ICommand ShiftCommand { get
-            {
-                return new RelayCommand<object>(ShiftCommandAction);
-            } }
+        public ICommand ShiftCommand
+        {
+            get { return new RelayCommand<object>(ShiftCommandAction); }
+        }
 
 
         public ICommand OneClickCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
-        public ICommand NextButtonCommand { get
-            {
-                return new RelayCommand<object>(NextButtonAction);
-            } }
+        public ICommand NextButtonCommand
+        {
+            get { return new RelayCommand<object>(NextButtonAction); }
+        }
 
 
         public ICommand ReturenButtonCommand
@@ -121,28 +121,30 @@ namespace WpfMHilfer.view
             if (thistable is null) { return; }
             generateListViewNames(thistable);
 
-            next_step(thistable);
+            TableSteps ts = new TableSteps();
+            ts.previousStep = TableStep;
+            TableStep.nextStep = ts;
+
+
+            next_step(TableStep);
             //due to the main table is changed to tablestep, this could be circle
 
         }
 
-        private void next_step(Table thistable)
+        private void next_step(TableSteps ts)
         {
-            TableSteps ts = new TableSteps();
-            ts.previousStep = TableStep;
-            ts.actTable = thistable;
-            
-            this.TableStep = ts;
-
+            if (ts.nextStep is null) { return; }
+            this.TableStep = ts.nextStep;
         }
         private void prev_step()
         {
-            if(TableStep.actTable.stufe == 0)
+            if (TableStep.actTable.stufe == 0)
             {
                 return;
             }
             TableSteps ts = this.TableStep;
             this.TableStep = this.TableStep.previousStep;
+            this.TableStep.nextStep = ts;
 
         }
         private void ReturenButtonAction(object sender)
@@ -151,18 +153,17 @@ namespace WpfMHilfer.view
             generateListViewNames(TableStep.previousStep.actTable);
             prev_step();
 
-            //if (TableStep.previousStep == null)
-            //{
-            //    Button button = (Button)sender;
-            //    button.IsEnabled = false;
-            //    button.Background = Brushes.DimGray;
-            //}
         }
 
         private void EditButtonAction(string obj)
         {
+            try { 
             AddElementWindow editWindow = new AddElementWindow(masterController, ParentElement);
             editWindow.Show();
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void LeftClickAction(object sender)
@@ -198,12 +199,13 @@ namespace WpfMHilfer.view
 
         private void ShiftCommandAction(object obj)
         {
-            throw new NotImplementedException();
+
         }
 
         private void NextButtonAction(object obj)
         {
-            throw new NotImplementedException();
+            next_step(this.TableStep);
+            generateListViewNames(this.TableStep.actTable);
         }
 
         public void generateListViewNames(Table table)

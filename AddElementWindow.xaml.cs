@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfMHilfer.view;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 
@@ -26,6 +25,7 @@ namespace WpfMHilfer
     public partial class AddElementWindow : Window
     {
         public ViewController viewController { get; set; }
+        public AddElementViewModel addElementViewModel { get; set; }
         public ComboBoxViewModel comboBoxViewModel { get; set; }
         public MasterController masterController { get; set; }
         public AddElementWindow(MasterController mc)
@@ -33,6 +33,7 @@ namespace WpfMHilfer
             InitializeComponent();
             masterController = mc;
             viewController = masterController.viewController;
+            addElementViewModel = masterController.addElementViewModel;
             AddElementGrid.DataContext = viewController;
             comboBoxViewModel = new ComboBoxViewModel(new ObservableCollection<Element>( masterController.hilfer.elements));
             EntitiesComboBox.ItemsSource = comboBoxViewModel.elements;

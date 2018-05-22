@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMHilfer"
+        xmlns:view="clr-namespace:WpfMHilfer.view"
         mc:Ignorable="d"
         Title="AddElementWindow" Height="450" Width="800">
     <Window.Resources>
@@ -11,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="AddElementGrid">
@@ -24,6 +26,25 @@
                           />
             <TextBlock Text="Description(Optional):"/>
             <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" AcceptsTab="True" MinLines="5" MaxLines="20"></TextBox>
+
+
+            <Grid x:Name="relevantElesGrid" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox x:Name="allEntitiesListBox" DataContext="{Binding}" Grid.Column="1"></ListBox>
+                <StackPanel Grid.Column="2" Orientation="Vertical">
+                    <Button Content="add" Visibility="Visible"></Button>
+                    <Button Content="remove" Visibility="Visible"></Button>
+                </StackPanel>
+                <ListBox Grid.Column="3"></ListBox>
+
+            </Grid>
+            
             <StackPanel  Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button x:Name="Save" Content="Save" Width="75" Click="Save_Click" HorizontalAlignment="Right">
                 </Button>
@@ -31,6 +52,6 @@
                 <Button x:Name="Cancel"  Content="Cancel" Width="75" Click="Cancel_Click" HorizontalAlignment="Right"></Button>
             </StackPanel>
         </StackPanel>
-
     </Grid>
+
 </Window>

@@ -21,11 +21,15 @@
 
 
     <Grid x:Name="MainPanel" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="191*"/>
+            <RowDefinition Height="313*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="0" >
+        <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="0" Grid.RowSpan="2" >
             <DockPanel x:Name="MenuDockPanel" LastChildFill="False" >
                 <DockPanel DockPanel.Dock="Top" >
                     <Grid x:Name="HeaderGrid">
@@ -54,8 +58,7 @@
                                 Width="{Binding Converter={StaticResource PercentageConverter},
                                         ElementName=HeaderGrid,
                                         Path=ActualWidth,
-                                        ConverterParameter=0.235}">
-
+                                        ConverterParameter=0.235}" Margin="0,0,3,2" VerticalAlignment="Bottom">
                             <Button.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding NextButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
@@ -118,7 +121,7 @@
                                                 <MenuItem Header= "Delete"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
                                                           CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />
-                                                
+
                                             </ContextMenu>
                                         </Button.ContextMenu>
                                     </Button>
@@ -131,13 +134,20 @@
         </Border>
 
 
-        <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                   TextAlignment="Center"
-                   Text="{Binding Path=Description, Mode=TwoWay}"
+        <TextBox  Grid.Column="1"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                  Background="Transparent"
+                  BorderThickness="1"
+                  BorderBrush="LightBlue"
+                  TextAlignment="Center"
+                  IsReadOnly="False"
+                  TextWrapping="Wrap"
+                   Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2"
                    >
 
-        </TextBlock>
-        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" Style="{StaticResource CircleButtonStyle}" Grid.Column="1">
+        </TextBox>
+        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
             <Button.InputBindings>
                 <MouseBinding Gesture="LeftClick" Command="{Binding EditButtonCommand}" CommandParameter="">
                 </MouseBinding>
