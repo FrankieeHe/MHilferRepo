@@ -36,7 +36,7 @@ namespace WpfMHilfer
             MainPanel.DataContext = viewController;
         }
 
-
+            
         public void addNewElement(object sender, RoutedEventArgs e)
         {
             Window addElementWindow = new AddElementWindow(GetMasterController());

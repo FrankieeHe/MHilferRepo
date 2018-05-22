@@ -27,10 +27,10 @@ namespace MHilfer.controller
         public void allSave()
         {
             JObject jsonAll = new JObject(
-             new JProperty("elementJson", JsonConvert.SerializeObject(this.masterController.hilfer.elements,Formatting.Indented)),
-             new JProperty("tablesJson", JsonConvert.SerializeObject(this.masterController.hilfer.tables,Formatting.Indented)),
-             new JProperty("relationsJson", JsonConvert.SerializeObject(this.masterController.hilfer.relations,Formatting.Indented)),
-             new JProperty("relevElesJson", JsonConvert.SerializeObject(this.masterController.hilfer.relevEles,Formatting.Indented)));
+             new JProperty("elementJson", JsonConvert.SerializeObject(this.masterController.hilfer.elements, Formatting.Indented)),
+             new JProperty("tablesJson", JsonConvert.SerializeObject(this.masterController.hilfer.tables, Formatting.Indented)),
+             new JProperty("relationsJson", JsonConvert.SerializeObject(this.masterController.hilfer.relations, Formatting.Indented)),
+             new JProperty("relevElesJson", JsonConvert.SerializeObject(this.masterController.hilfer.relevEles, Formatting.Indented)));
 
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -63,12 +63,14 @@ namespace MHilfer.controller
                 List<Relation> relations = JsonConvert.DeserializeObject<List<Relation>>(jrelations);
 
                 string jrelevEles = (string)json["relevElesJson"];
-                List<RelevEle> relevEles = JsonConvert.DeserializeObject<List<RelevEle>>(jrelevEles);
-
+                if (jrelevEles != null)
+                {
+                    List<RelevEle> relevEles = JsonConvert.DeserializeObject<List<RelevEle>>(jrelevEles);
+                    this.masterController.hilfer.relevEles = relevEles;
+                }
                 this.masterController.hilfer.elements = elements;
                 this.masterController.hilfer.tables = tables;
                 this.masterController.hilfer.relations = relations;
-                this.masterController.hilfer.relevEles = relevEles;
             }
         }
 

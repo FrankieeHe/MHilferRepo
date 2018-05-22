@@ -122,6 +122,7 @@ namespace WpfMHilfer.view
             generateListViewNames(thistable);
 
             TableSteps ts = new TableSteps();
+            ts.actTable = thistable;
             ts.previousStep = TableStep;
             TableStep.nextStep = ts;
 

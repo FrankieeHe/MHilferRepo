@@ -28,18 +28,25 @@ namespace WpfMHilfer
         public AddElementViewModel addElementViewModel { get; set; }
         public ComboBoxViewModel comboBoxViewModel { get; set; }
         public MasterController masterController { get; set; }
+
+        //Add Item entry
         public AddElementWindow(MasterController mc)
         {
             InitializeComponent();
             masterController = mc;
             viewController = masterController.viewController;
             addElementViewModel = masterController.addElementViewModel;
-            AddElementGrid.DataContext = viewController;
             comboBoxViewModel = new ComboBoxViewModel(new ObservableCollection<Element>( masterController.hilfer.elements));
             EntitiesComboBox.ItemsSource = comboBoxViewModel.elements;
             EntitiesComboBox.DisplayMemberPath = "name";
             EditSave.Visibility = Visibility.Collapsed;
+            addElementViewModel.init_ElevElementList();
+            this.DataContext = addElementViewModel;
         }
+
+
+
+        //Edit Item entry
         public AddElementWindow(MasterController mc, Element parentElement) : this(mc)
         {
             NameTextBox.Text = parentElement.name;
@@ -50,6 +57,7 @@ namespace WpfMHilfer
             EditSave.Visibility = Visibility.Visible;
             Save.Visibility = Visibility.Collapsed;
         }
+
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
@@ -70,6 +78,7 @@ namespace WpfMHilfer
             viewController.generateListViewNames(null);
 
         }
+
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
