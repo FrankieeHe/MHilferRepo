@@ -40,6 +40,30 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="LinkButtonStyle" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Margin" Value="3,0,3,0"/>
+        <Setter Property="Height" Value="Auto"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="SkyBlue" Background="SkyBlue" BorderThickness="2" Padding="3">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Content="{TemplateBinding Content}"  
+                                          TextElement.FontSize="15">
+                            <ContentPresenter.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="TextDecorations" Value="Underline"/>
+                                </Style>
+                            </ContentPresenter.Resources>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style TargetType="Label">
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="FontWeight" Value="Bold"/>

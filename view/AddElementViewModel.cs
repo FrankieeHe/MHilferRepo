@@ -112,6 +112,7 @@ namespace WpfMHilfer.view
         {
             List<string> selectedRelevs = SelectedRelevEleListView.Names.ToList<string>();
             masterController.relevEleController.add_Rels(element, selectedRelevs);
+            masterController.viewController.SeeAlsoListView = new ListViewViewModel(masterController.hilfer.relevEles.Find(rE => rE.element.name == element.name).relevantElements);
         }
 
     }

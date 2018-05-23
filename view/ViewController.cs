@@ -11,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using WpfMHilfer.model;
 
 namespace WpfMHilfer.view
 {
@@ -21,22 +21,19 @@ namespace WpfMHilfer.view
         private Element _parentElement;
         private TableSteps _TableStep;
         private ListViewViewModel _ListView;
+        private ListViewViewModel _seeAlsoListView;
         private string _Description;
         public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
         public ICommand ShiftCommand
         {
             get { return new RelayCommand<object>(ShiftCommandAction); }
         }
-
-
         public ICommand OneClickCommand { get; set; }
         public ICommand DoubleClickCommand { get; set; }
         public ICommand NextButtonCommand
         {
             get { return new RelayCommand<object>(NextButtonAction); }
         }
-
-
         public ICommand ReturenButtonCommand
         {
             get { return new RelayCommand<object>(ReturenButtonAction); }
@@ -44,6 +41,10 @@ namespace WpfMHilfer.view
         public ICommand EditButtonCommand
         {
             get { return new RelayCommand<string>(EditButtonAction); }
+        }
+        public ICommand SeeAlsoJumpCommand
+        {
+            get { return new RelayCommand<string>(SeeAlsoJumpAction); }
         }
 
         public ICommand LeftClickCommand
@@ -62,6 +63,12 @@ namespace WpfMHilfer.view
                 this._TableStep = value;
                 OnPropertyChanged("TableStep");
             }
+        }
+
+        public ListViewViewModel SeeAlsoListView
+        {
+            get { return _seeAlsoListView; }
+            set { _seeAlsoListView = value; OnPropertyChanged("SeeAlsoListView"); }
         }
         public Element ParentElement
         {
@@ -111,6 +118,13 @@ namespace WpfMHilfer.view
         {
             ParentElement = masterController.elementController.findElement(obj);
             Description = ParentElement.desc;
+
+
+            RelevEle relevEle = this.masterController.hilfer.relevEles.Find(rE => rE.element.Equals(ParentElement));
+            List<string> caListView = new List<string>();
+            if (relevEle != null) { caListView = relevEle.relevantElements; }
+            SeeAlsoListView = new ListViewViewModel(caListView);
+
         }
 
         private void EntityUnfold(string obj)
@@ -118,7 +132,9 @@ namespace WpfMHilfer.view
 
             ParentElement = masterController.elementController.findElement(obj);
             Table thistable = masterController.elementController.subTable(ParentElement);
-            if (thistable is null) { return; }
+            if (thistable is null) {
+                thistable = masterController.elementController.preRelation(ParentElement).table;
+            }
             generateListViewNames(thistable);
 
             TableSteps ts = new TableSteps();
@@ -126,10 +142,13 @@ namespace WpfMHilfer.view
             ts.previousStep = TableStep;
             TableStep.nextStep = ts;
 
-
             next_step(TableStep);
             //due to the main table is changed to tablestep, this could be circle
-
+        }
+        private void SeeAlsoJumpAction(string obj)
+        {
+            ClickForDesc(obj);
+            EntityUnfold(obj);
         }
 
         private void next_step(TableSteps ts)
@@ -189,6 +208,7 @@ namespace WpfMHilfer.view
                 ParentElement = masterController.elementController.findElement(t.name);
 
                 masterController.elementController.removeElement(ele);
+                masterController.relevEleController.removeRelevance(ele);
                 generateListViewNames(t);
             }
             catch (Exception e)

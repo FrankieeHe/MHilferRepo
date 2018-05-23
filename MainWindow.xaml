@@ -21,10 +21,7 @@
 
 
     <Grid x:Name="MainPanel" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="191*"/>
-            <RowDefinition Height="313*"/>
-        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
@@ -133,22 +130,39 @@
             </DockPanel>
         </Border>
 
-        <StackPanel Grid.Column="1">
+        <Grid x:Name="DescriptionPanel" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
             <TextBox  HorizontalAlignment="Stretch"
                   HorizontalContentAlignment="Stretch"
+                      VerticalAlignment="Center"
                   Background="Transparent"
                   BorderThickness="1"
                   BorderBrush="LightBlue"
                   TextAlignment="Left"
                   IsReadOnly="False"
                   TextWrapping="Wrap"
-                   Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2"
-                   >
-
+                   Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2">
             </TextBox>
-
-            <TextBlock> To be the see also apart</TextBlock>
-        </StackPanel>
+            <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
+            <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
+                      Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
+                      ItemsSource="{Binding SeeAlsoListView.Names}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Button Content="{Binding }" Style="{StaticResource LinkButtonStyle}" 
+                                    Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SeeAlsoListView,Path=ActualWidth, ConverterParameter=0.92}"
+                                    Command="{Binding Path=DataContext.SeeAlsoJumpCommand,  RelativeSource={RelativeSource Mode=FindAncestor,  AncestorType=Grid, AncestorLevel=2}}" 
+                                    CommandParameter="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
 
         <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
             <Button.InputBindings>

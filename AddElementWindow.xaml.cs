@@ -95,8 +95,8 @@ namespace WpfMHilfer
             string descTextBox = DescriptionTextBox.Text;
             
             masterController.elementController.overrideElement(nameTextBox, descTextBox);
+            //add reset and actuallization
             addElementViewModel.update_SelectedRelevs(masterController.elementController.findElement(nameTextBox));
-
             viewController.Description = descTextBox;
             this.Close();
         }

@@ -41,5 +41,13 @@ namespace WpfMHilfer.controller
             }
         }
 
+        internal void removeRelevance(Element ele)
+        {
+            masterController.hilfer.relevEles.RemoveAll(rE => rE.element.Equals(ele));
+            foreach(RelevEle relv in masterController.hilfer.relevEles)
+            {
+                relv.relevantElements.RemoveAll(n => n.Equals(ele.name));
+            }
+        }
     }
 }
