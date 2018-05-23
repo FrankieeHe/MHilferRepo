@@ -19,7 +19,7 @@ namespace MHilfer.controller
         public TableController tableController { set; get; }
         public ViewController viewController { set; get; }
         public Hilfer hilfer { set; get; }
-        public RelevEleController relevanceElementController{ set; get; } 
+        public RelevEleController relevEleController{ set; get; } 
 
         public MasterController()
         {
@@ -34,7 +34,7 @@ namespace MHilfer.controller
             ioController = new IOController();
             ioController.setMasterController(this);
             tableController = new TableController(this);
-            relevanceElementController = new RelevEleController(this);
+            relevEleController = new RelevEleController(this);
             addElementViewModel = new AddElementViewModel();
             addElementViewModel.setMasterController(this);
 

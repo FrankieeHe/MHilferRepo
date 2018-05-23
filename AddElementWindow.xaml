@@ -26,8 +26,6 @@
                           />
             <TextBlock Text="Description(Optional):"/>
             <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" AcceptsTab="True" MinLines="5" MaxLines="20"></TextBox>
-
-
             <Grid x:Name="relevantElesGrid" >
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="0.5*"/>
@@ -37,29 +35,24 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1">
-                    <TextBlock  Text="Entities:"></TextBlock>
-                    <ListBox x:Name="allEntitiesListBox" ItemsSource="{Binding Path=RelevEleListView.Names}" 
-                         MinHeight="100" MaxHeight="180" VerticalAlignment="Bottom">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <ListBoxItem>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding}"/>
-                                        </StackPanel>
-                                    </ListBoxItem>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                    <TextBlock  Text="Entities"></TextBlock>
+                    <ListBox x:Name="allEntitiesListBox" ItemsSource="{Binding Path=RelevEleListView.Names}"
+                             SelectedItem="{Binding Path=SelectedName}"
+                             MinHeight="100" MaxHeight="180" VerticalAlignment="Bottom"
+                             ItemTemplate="{StaticResource GlobalListViewTemplate}">
                     </ListBox>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Orientation="Vertical">
-                    <Button Content="add" Margin="3,20,3,3" Command="{Binding Source={StaticResource addElementVM}, Path=addCommand}" CommandParameter=""></Button>
-                    <Button Content="remove" Command="{Binding Source={StaticResource addElementVM}, Path=removeCommand}" CommandParameter="" ></Button>
+                    <Button Content="Add" Margin="3,20,3,3" Command="{Binding Path=addCommand}" CommandParameter=""></Button>
+                    <Button Content="Remove" Command="{Binding Path=removeCommand}" CommandParameter="" ></Button>
                 </StackPanel>
                 <StackPanel Grid.Column="3">
                     <TextBlock Text="Seleted Relevant:"></TextBlock>
-                    <ListBox x:Name="selectedEntitiesListBox" MinHeight="100" MaxHeight="180" DataContext="{Binding Source={StaticResource addElementVM}, Path=SelectedRelevEleListView}"  Grid.Column="3" ></ListBox>
+                    <ListBox x:Name="selectedEntitiesListBox" MinHeight="100" MaxHeight="180" Grid.Column="3"
+                             ItemsSource="{Binding Path=SelectedRelevEleListView.Names }"  
+                             SelectedItem="{Binding ToRemoveName}"
+                             ItemTemplate="{StaticResource GlobalListViewTemplate}"
+                              ></ListBox>
                 </StackPanel>
             </Grid>
 

@@ -36,7 +36,7 @@ namespace WpfMHilfer
             masterController = mc;
             viewController = masterController.viewController;
             addElementViewModel = masterController.addElementViewModel;
-            comboBoxViewModel = new ComboBoxViewModel(new ObservableCollection<Element>( masterController.hilfer.elements));
+            comboBoxViewModel = new ComboBoxViewModel(new ObservableCollection<Element>(masterController.hilfer.elements));
             EntitiesComboBox.ItemsSource = comboBoxViewModel.elements;
             EntitiesComboBox.DisplayMemberPath = "name";
             EditSave.Visibility = Visibility.Collapsed;
@@ -53,25 +53,30 @@ namespace WpfMHilfer
             DescriptionTextBox.Text = parentElement.desc;
             EntitiesComboBox.SelectedItem = masterController.elementController.getPreElement(parentElement);
             NameTextBox.IsReadOnly = true;
-            EntitiesComboBox.IsReadOnly=true;
+            EntitiesComboBox.IsReadOnly = true;
             EditSave.Visibility = Visibility.Visible;
             Save.Visibility = Visibility.Collapsed;
+
+            addElementViewModel.init_SelectedElevElementList(parentElement);
         }
 
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             try
-            { 
-            string nameTextBox = NameTextBox.Text;
-            Element parentEle= (Element)EntitiesComboBox.SelectedItem;
-            string descTextBox = DescriptionTextBox.Text;
-            if (Regex.Match(nameTextBox, @"(^\s+)|(^$)").Success) { MessageBox.Show("name is required"); return; }
-            Element childEle = new Element(nameTextBox, descTextBox);
-            masterController.elementController.addNewElement(childEle);
-            masterController.elementController.addElementToParent(childEle, parentEle);
-            this.Close();
-            }catch(Exception exc)
+            {
+                string nameTextBox = NameTextBox.Text;
+                Element parentEle = (Element)EntitiesComboBox.SelectedItem;
+                string descTextBox = DescriptionTextBox.Text;
+                if (Regex.Match(nameTextBox, @"(^\s+)|(^$)").Success) { MessageBox.Show("name is required"); return; }
+                Element childEle = new Element(nameTextBox, descTextBox);
+                masterController.elementController.addNewElement(childEle);
+                masterController.elementController.addElementToParent(childEle, parentEle);
+
+                addElementViewModel.update_SelectedRelevs(childEle);
+                this.Close();
+            }
+            catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
             }
@@ -88,7 +93,10 @@ namespace WpfMHilfer
         {
             string nameTextBox = NameTextBox.Text;
             string descTextBox = DescriptionTextBox.Text;
+            
             masterController.elementController.overrideElement(nameTextBox, descTextBox);
+            addElementViewModel.update_SelectedRelevs(masterController.elementController.findElement(nameTextBox));
+
             viewController.Description = descTextBox;
             this.Close();
         }

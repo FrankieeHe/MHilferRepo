@@ -133,21 +133,24 @@
             </DockPanel>
         </Border>
 
-
-        <TextBox  Grid.Column="1"
-                  HorizontalAlignment="Stretch"
+        <StackPanel Grid.Column="1">
+            <TextBox  HorizontalAlignment="Stretch"
                   HorizontalContentAlignment="Stretch"
                   Background="Transparent"
                   BorderThickness="1"
                   BorderBrush="LightBlue"
-                  TextAlignment="Center"
+                  TextAlignment="Left"
                   IsReadOnly="False"
                   TextWrapping="Wrap"
                    Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2"
                    >
 
-        </TextBox>
-        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
+            </TextBox>
+
+            <TextBlock> To be the see also apart</TextBlock>
+        </StackPanel>
+
+        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
             <Button.InputBindings>
                 <MouseBinding Gesture="LeftClick" Command="{Binding EditButtonCommand}" CommandParameter="">
                 </MouseBinding>

@@ -48,4 +48,14 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
     </Style>
 
+    <DataTemplate x:Name="GlobalListViewTemplate" x:Key="GlobalListViewTemplate">
+        <StackPanel>
+            <ListBoxItem>
+                <StackPanel>
+                    <TextBlock Text="{Binding}"/>
+                </StackPanel>
+            </ListBoxItem>
+        </StackPanel>
+    </DataTemplate>
+
 </ResourceDictionary>

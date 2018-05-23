@@ -26,9 +26,9 @@ namespace WpfMHilfer.controller
             return relevEle.relevantElements;
         }
 
-        public void add_Rels(Element ele, List<string> relevEles, bool reset) {
+
+        public void add_Rels(Element ele, List<string> relevEles) {
             RelevEle relevEle = masterController.hilfer.relevEles.Find(r => r.element.Equals(ele));
-            if (reset && relevEle != null) { masterController.hilfer.relevEles.Remove(relevEle); relevEle = null; }
             if (relevEle is null)
             {
                 RelevEle rE = new RelevEle(ele, relevEles);
@@ -37,8 +37,7 @@ namespace WpfMHilfer.controller
             }
             else
             {
-                List<string> new_eles= relevEle.relevantElements.Concat(relevEles).ToList<string>();
-                relevEle.relevantElements = new_eles.Distinct().ToList();
+                relevEle.relevantElements = relevEles;
             }
         }
 
