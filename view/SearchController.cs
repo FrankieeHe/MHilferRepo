@@ -1,15 +1,15 @@
-﻿using Microsoft.Analytics.Interfaces;
-using Microsoft.Analytics.Types.Sql;
+﻿using MHilfer.controller;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace WpfMHilfer.view
 {
     public class SearchController : ObservableObject
     {
         public SearchController() { }
+
+        internal void setMasterController(MasterController masterController)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

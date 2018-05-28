@@ -175,8 +175,7 @@
                    Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2">
             </TextBox>
             <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
-            <ListView x:Name="SeeAlsoListView" BorderBrush="Trans
-                      " Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
+            <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
                       Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
                       ItemsSource="{Binding SeeAlsoListView.Names}">
                 <ListView.ItemTemplate>
@@ -197,6 +196,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBox  Grid.Column="0" Name="SearchBox" HorizontalAlignment="Left" KeyDown="SearcgTextBox_KeyDown" VerticalContentAlignment="Center" 
+                          BorderThickness="2px" 
                           TextWrapping="Wrap" Height="35" Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SearchGrid,Path=ActualWidth,ConverterParameter=0.86}"  
                           Text="{Binding SearchText}" VerticalAlignment="Center" 
                      GotFocus="SearchBox_GotFocus" GotMouseCapture="SearchTextBox_GotMouseCapture">
