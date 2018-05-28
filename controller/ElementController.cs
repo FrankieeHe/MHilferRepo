@@ -108,7 +108,7 @@ namespace MHilfer.controller
         }
         public Relation preRelation(Element e)
         {
-            Relation prerelation = masterController.hilfer.relations.Find(rel => rel.element.Equals(e) && rel.leftOwnRight == false);
+            Relation prerelation = masterController.hilfer.relations.Find(rel => rel.element.name.Equals(e.name) && rel.leftOwnRight == false);
             if (prerelation is null) { throw new Exception("preRelation catch null "); }
             return prerelation;
         }
