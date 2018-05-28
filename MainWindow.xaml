@@ -51,7 +51,7 @@
                                 <MouseBinding Gesture="LeftClick" Command="{Binding HomeButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
-                        
+
                         <Button x:Name="Return" Content ="Return" Grid.Column="1"
                                 HorizontalAlignment="Left"
                                 Tag="{Binding ParentElement}"  
@@ -156,9 +156,10 @@
             </DockPanel>
         </Border>
 
-        <Grid x:Name="DescriptionPanel" Grid.Column="1">
+        <Grid x:Name="DescriptionPanel" Grid.Column="1" Height="504" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -174,7 +175,8 @@
                    Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2">
             </TextBox>
             <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
-            <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
+            <ListView x:Name="SeeAlsoListView" BorderBrush="Trans
+                      " Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
                       Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
                       ItemsSource="{Binding SeeAlsoListView.Names}">
                 <ListView.ItemTemplate>
@@ -188,6 +190,43 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Grid Name="SearchGrid" Grid.Row="3"  Margin="0,3,198,5" HorizontalAlignment="Right" 
+                  Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.6}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox  Grid.Column="0" Name="SearchBox" HorizontalAlignment="Left" KeyDown="SearcgTextBox_KeyDown" VerticalContentAlignment="Center" 
+                          TextWrapping="Wrap" Height="35" Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SearchGrid,Path=ActualWidth,ConverterParameter=0.86}"  
+                          Text="{Binding SearchText}" VerticalAlignment="Center" 
+                     GotFocus="SearchBox_GotFocus" GotMouseCapture="SearchTextBox_GotMouseCapture">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Search" Foreground="LightGray" FontStyle="Italic"></Label>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Background" Value="White"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <Button Grid.Column="1" Style="{DynamicResource NoChromeButton}"  Width="40" Command="{Binding SearchButtonCommand}" CommandParameter="">
+                    <Image Source="/resources/search.png"></Image>
+                </Button>
+            </Grid>
         </Grid>
 
         <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
