@@ -55,6 +55,12 @@ namespace WpfMHilfer.view
         {
             get { return new RelayCommand<object>(DeleteCommandAction); }
         }
+        public ICommand HomeButtonCommand
+        {
+            get { return new RelayCommand<object>(HomeButtonAction); }
+        }
+
+
         internal TableSteps TableStep
         {
             get { return this._TableStep; }
@@ -134,6 +140,8 @@ namespace WpfMHilfer.view
             Table thistable = masterController.elementController.subTable(ParentElement);
             if (thistable is null) {
                 thistable = masterController.elementController.preRelation(ParentElement).table;
+                generateListViewNames(thistable);
+                return;
             }
             generateListViewNames(thistable);
 
@@ -170,8 +178,9 @@ namespace WpfMHilfer.view
         private void ReturenButtonAction(object sender)
         {
             if (TableStep.previousStep is null) { generateListViewNames(null); return; }
-            generateListViewNames(TableStep.previousStep.actTable);
             prev_step();
+            Table table = TableStep.actTable;
+            generateListViewNames(table);
 
         }
 
@@ -229,6 +238,18 @@ namespace WpfMHilfer.view
             generateListViewNames(this.TableStep.actTable);
         }
 
+        private void HomeButtonAction(object obj)
+        {
+            if (ParentElement.name.Equals("Wellcome!")) { return; }
+            Table mainTable = masterController.hilfer.tables.Find(t => t.stufe == 0);
+            TableSteps tableStep = new TableSteps();
+            tableStep.previousStep = TableStep;
+            tableStep.actTable = mainTable;
+            TableStep.nextStep = tableStep;
+            next_step(TableStep);
+            ParentElement = null;
+            generateListViewNames(mainTable);
+        }
         public void generateListViewNames(Table table)
         {
             if (table == null)

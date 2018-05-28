@@ -3,12 +3,12 @@ using System;
 
 namespace MHilfer.model
 {
-    [JsonObject(MemberSerialization.OptIn)]
+    [JsonObject(IsReference = true)]
     public class Relation
     {
-        [JsonProperty]
-        public Element element { get; set; }
-        [JsonProperty]
+        [JsonProperty(ItemIsReference =true)]
+        public  Element element { get; set; }
+        [JsonProperty(ItemIsReference = true)]
         public Table table { get; set; }
 
         /*

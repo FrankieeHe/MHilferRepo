@@ -32,14 +32,32 @@
                     <Grid x:Name="HeaderGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="Return" Content ="Return" Grid.Column="0"
+                        <Button x:Name="Home" Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                Width="{Binding Converter={StaticResource PercentageConverter},
+                                        ElementName=HeaderGrid,
+                                        Path=ActualWidth,
+                                        ConverterParameter=0.1
+                            }">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="/resources/home.png" />
+                                </ControlTemplate>
+                            </Button.Template>
+                            <Button.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding HomeButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
+                            </Button.InputBindings>
+                        </Button>
+                        
+                        <Button x:Name="Return" Content ="Return" Grid.Column="1"
                                 HorizontalAlignment="Left"
                                 Tag="{Binding ParentElement}"  
                                 Background="{Binding Converter={StaticResource colorConverter},
                             ElementName=MainPanel,
-                            Path=DataContext.TableStep.actTable.stufe,Mode=OneWay,
+                            Path=DataContext.TableStep.actTable.stufe,Mode=TwoWay,
                             ConverterParameter=0 }" 
                                 Width="{Binding Converter={StaticResource PercentageConverter},
                                         ElementName=HeaderGrid,
@@ -50,7 +68,7 @@
                                 <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
-                        <Button x:Name="Next" Content="Next" Grid.Column="0"
+                        <Button x:Name="Next" Content="Next" Grid.Column="1"
                                 HorizontalAlignment="Right"
                                 Width="{Binding Converter={StaticResource PercentageConverter},
                                         ElementName=HeaderGrid,
@@ -61,7 +79,7 @@
                             </Button.InputBindings>
                         </Button>
                         <Label x:Name="ParentLabel" Content="{Binding Path=ParentElement.name}"
-                             Grid.Column="1"/>
+                             Grid.Column="2"/>
                     </Grid>
                 </DockPanel>
 
@@ -82,7 +100,15 @@
                 <StackPanel x:Name="TableStackPanel"  Visibility="Visible" 
                             HorizontalAlignment="Stretch" 
                             DataContext="{Binding Path=ListView, Mode=TwoWay}"
-                            Width="{Binding ActualWidth , ElementName=MenuDockPanel}">
+                            Width="{Binding ActualWidth , ElementName=MenuDockPanel}" RenderTransformOrigin="0.5,0.5">
+                    <StackPanel.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="0.254"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </StackPanel.RenderTransform>
                     <ListView x:Name="NamesListView"  ItemsSource="{Binding Names}" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
