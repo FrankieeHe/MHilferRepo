@@ -58,4 +58,16 @@ C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMH
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.exe
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.pdb
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
-C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer_Content.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\de\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\en\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\es\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\fr\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\it\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\ja\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\ko\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\ru\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\GUI\SearchResultWindow.g.cs
+C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\GUI\SearchResultWindow.baml

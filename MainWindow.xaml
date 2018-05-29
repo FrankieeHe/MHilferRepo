@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMHilfer"
         xmlns:view="clr-namespace:WpfMHilfer.view"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:converter="clr-namespace:WpfMHilfer.converter"
         mc:Ignorable="d"
         Title="MainWindow" >
@@ -189,17 +190,16 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Name="SearchGrid" Grid.Row="3"  Margin="0,3,198,5" HorizontalAlignment="Right" 
+            <Grid Name="SearchGrid" Grid.Row="3"  Margin="0,3,198,5" HorizontalAlignment="Left" 
                   Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.6}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox  Grid.Column="0" Name="SearchBox" HorizontalAlignment="Left" KeyDown="SearcgTextBox_KeyDown" VerticalContentAlignment="Center" 
+                <TextBox  Name="SearchBox" Grid.Column="0"  HorizontalAlignment="Left" VerticalContentAlignment="Bottom" 
                           BorderThickness="2px" 
                           TextWrapping="Wrap" Height="35" Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SearchGrid,Path=ActualWidth,ConverterParameter=0.86}"  
-                          Text="{Binding SearchText}" VerticalAlignment="Center" 
-                     GotFocus="SearchBox_GotFocus" GotMouseCapture="SearchTextBox_GotMouseCapture">
+                          Text="{Binding SearchText}" VerticalAlignment="Center" >
                     <TextBox.Style>
                         <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                             <Style.Resources>
@@ -222,9 +222,24 @@
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SearchTextBoxEnterCommand, Mode=OneWay}"/>
+                    </TextBox.InputBindings>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="GotFocus">
+                            <i:InvokeCommandAction Command= "{Binding SearchBox_GotFocus, Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="GotMouseCapture">
+                            <i:InvokeCommandAction Command="{Binding SearchTextBox_GotMouseCapture , Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </TextBox>
-                <Button Grid.Column="1" Style="{DynamicResource NoChromeButton}"  Width="40" Command="{Binding SearchButtonCommand}" CommandParameter="">
-                    <Image Source="/resources/search.png"></Image>
+                <Button Grid.Column="1" Style="{DynamicResource NoChromeButton}"  Width="40" Command="{Binding SearchButtonCommand}" CommandParameter="{Binding ElementName=SearchBox}">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="/resources/search.png" />
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </Grid>
         </Grid>

@@ -37,6 +37,7 @@ namespace WpfMHilfer
             InitializeComponent();
             MainPanel.DataContext = viewController;
             SearchGrid.DataContext = searchController;
+            searchController.SearchBox = SearchBox;
         }
 
             
