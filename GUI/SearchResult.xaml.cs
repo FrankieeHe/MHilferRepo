@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfMHilfer.model;
 using WpfMHilfer.view;
 
 namespace WpfMHilfer.GUI
@@ -35,14 +36,10 @@ namespace WpfMHilfer.GUI
         {
             this.masterController = masterController;
             this.SearchText = searchText;
+            SearchItemLabel.Content = SearchText;
+            List<string> searchResults = masterController.searchController.searchProcedure(SearchText, masterController.hilfer.elements);
         }
 
-        private List<string> SearchProcedure(string keywords, List<Element>elements)
-        {
-
-
-
-            return null;
-        }
+        
     }
 }

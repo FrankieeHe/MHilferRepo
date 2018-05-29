@@ -27,17 +27,17 @@ namespace WpfMHilfer
     public partial class MainWindow : Window
     {
         public ViewController viewController { get; set; }
-        public SearchController searchController { get; set; }
+        public SearchViewController searchViewController { get; set; }
         public MasterController masterController { get; set; }
         public MainWindow()
         {
             masterController = new MasterController();
             viewController = masterController.viewController;
-            searchController = masterController.searchController;
+            searchViewController = masterController.searchViewController;
             InitializeComponent();
             MainPanel.DataContext = viewController;
-            SearchGrid.DataContext = searchController;
-            searchController.SearchBox = SearchBox;
+            SearchGrid.DataContext = searchViewController;
+            searchViewController.SearchBox = SearchBox;
         }
 
             

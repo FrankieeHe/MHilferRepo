@@ -178,12 +178,12 @@
             <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
             <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
                       Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
-                      ItemsSource="{Binding SeeAlsoListView.Names}">
+                      ItemsSource="{Binding SeeAlsoListView.Names}" MaxHeight="118">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <Button Content="{Binding }" Style="{StaticResource LinkButtonStyle}" 
-                                    Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SeeAlsoListView,Path=ActualWidth, ConverterParameter=0.92}"
+                                    Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SeeAlsoListView,Path=ActualWidth, ConverterParameter=0.92}" Height="Auto"
                                     Command="{Binding Path=DataContext.SeeAlsoJumpCommand,  RelativeSource={RelativeSource Mode=FindAncestor,  AncestorType=Grid, AncestorLevel=2}}" 
                                     CommandParameter="{Binding}" />
                         </StackPanel>

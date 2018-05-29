@@ -7,9 +7,9 @@ using WpfMHilfer.GUI;
 
 namespace WpfMHilfer.view
 {
-    public class SearchController : ObservableObject
+    public class SearchViewController : ObservableObject
     {
-        public SearchController() { }
+        public SearchViewController() { }
         public TextBox SearchBox { get; set; }
         public MasterController masterController { get; set; }
         internal void setMasterController(MasterController masterController)

@@ -159,6 +159,7 @@
     <Compile Include="controller\IOController.cs" />
     <Compile Include="controller\Mastercontroller.cs" />
     <Compile Include="controller\RelevEleController.cs" />
+    <Compile Include="controller\SearchController.cs" />
     <Compile Include="controller\TableController.cs" />
     <Compile Include="converter\BoolConverter.cs" />
     <Compile Include="converter\ColorConverter.cs" />
@@ -182,7 +183,7 @@
     <Compile Include="view\ObservableObject.cs" />
     <Compile Include="view\PercentageConverter.cs" />
     <Compile Include="view\RelayCommand.cs" />
-    <Compile Include="view\SearchController.cs" />
+    <Compile Include="view\SearchViewController.cs" />
     <Compile Include="view\TableSteps.cs" />
     <Compile Include="view\ViewController.cs" />
   </ItemGroup>

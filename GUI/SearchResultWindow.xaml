@@ -12,8 +12,12 @@
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding SearchItem}"></Label>
+      <TextBox Grid.Column="0" Margin="3,0,3,5">Searched Item</TextBox>
+        <Label x:Name="SearchItemLabel" Grid.Column="0"></Label>
         <StackPanel>
+          <ListView>
+            
+          </ListView>
         </StackPanel>
     </Grid>
 </Window>
