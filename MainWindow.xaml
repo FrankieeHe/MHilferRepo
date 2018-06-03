@@ -21,11 +21,12 @@
 
 
     <Grid x:Name="MainPanel" >
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="0" >
+        <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="0" Grid.RowSpan="2" >
             <DockPanel x:Name="MenuDockPanel" LastChildFill="False" >
                 <DockPanel DockPanel.Dock="Top" >
                     <Grid x:Name="HeaderGrid">
@@ -54,8 +55,7 @@
                                 Width="{Binding Converter={StaticResource PercentageConverter},
                                         ElementName=HeaderGrid,
                                         Path=ActualWidth,
-                                        ConverterParameter=0.235}">
-
+                                        ConverterParameter=0.235}" Margin="0,0,3,2" VerticalAlignment="Bottom">
                             <Button.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding NextButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
@@ -118,7 +118,7 @@
                                                 <MenuItem Header= "Delete"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
                                                           CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />
-                                                
+
                                             </ContextMenu>
                                         </Button.ContextMenu>
                                     </Button>
@@ -130,14 +130,41 @@
             </DockPanel>
         </Border>
 
+        <Grid x:Name="DescriptionPanel" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Stretch"
+                      VerticalAlignment="Center"
+                  Background="Transparent"
+                  BorderThickness="1"
+                  BorderBrush="LightBlue"
+                  TextAlignment="Left"
+                  IsReadOnly="False"
+                  TextWrapping="Wrap"
+                   Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2">
+            </TextBox>
+            <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
+            <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
+                      Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
+                      ItemsSource="{Binding SeeAlsoListView.Names}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Button Content="{Binding }" Style="{StaticResource LinkButtonStyle}" 
+                                    Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SeeAlsoListView,Path=ActualWidth, ConverterParameter=0.92}"
+                                    Command="{Binding Path=DataContext.SeeAlsoJumpCommand,  RelativeSource={RelativeSource Mode=FindAncestor,  AncestorType=Grid, AncestorLevel=2}}" 
+                                    CommandParameter="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
 
-        <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                   TextAlignment="Center"
-                   Text="{Binding Path=Description, Mode=TwoWay}"
-                   >
-
-        </TextBlock>
-        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,30,30" Style="{StaticResource CircleButtonStyle}" Grid.Column="1">
+        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource CircleButtonStyle}" Grid.Column="1" Grid.Row="1">
             <Button.InputBindings>
                 <MouseBinding Gesture="LeftClick" Command="{Binding EditButtonCommand}" CommandParameter="">
                 </MouseBinding>

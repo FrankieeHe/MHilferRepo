@@ -39,6 +39,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -151,6 +152,7 @@
     <Compile Include="controller\ElementController.cs" />
     <Compile Include="controller\IOController.cs" />
     <Compile Include="controller\Mastercontroller.cs" />
+    <Compile Include="controller\RelevEleController.cs" />
     <Compile Include="controller\TableController.cs" />
     <Compile Include="converter\BoolConverter.cs" />
     <Compile Include="converter\ColorConverter.cs" />
@@ -160,10 +162,12 @@
     <Compile Include="model\Element.cs" />
     <Compile Include="model\Hilfer.cs" />
     <Compile Include="model\Relation.cs" />
+    <Compile Include="model\RelevEle.cs" />
     <Compile Include="model\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
+    <Compile Include="view\AddElementViewModel.cs" />
     <Compile Include="view\ComboBoxViewModel.cs" />
     <Compile Include="view\ListViewViewModel.cs" />
     <Compile Include="view\ObservableObject.cs" />

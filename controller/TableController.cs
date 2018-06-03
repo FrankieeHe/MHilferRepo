@@ -14,7 +14,11 @@ namespace MHilfer.controller
         public TableController(MasterController masterController)
         {
             this.masterController = masterController;
-            if (masterController.hilfer.tables.Count() == 0) { masterController.hilfer.tables.Add(new Table("MainTable", 0)); }
+            if (masterController.hilfer.tables.Count() == 0) {
+                Table maintable = new Table("MainTable", 0);
+                masterController.hilfer.tables.Add(maintable);
+                masterController.viewController.TableStep.actTable = maintable;
+            }
         }
 
 

@@ -7,10 +7,11 @@ namespace WpfMHilfer.view
     public class ListViewViewModel
     {
         public ObservableCollection<string> Names { get; set; }
-
+        public int temp { get; set; }
         public ListViewViewModel(List<string> tablesEntitiesNames)
         {
             Names = new ObservableCollection<string>(tablesEntitiesNames);
+            temp = Names.Count;
         }
     }
 }

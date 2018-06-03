@@ -1,2 +1,2 @@
 # MHilferRepo
-This is a vs project
+This is a VS project
