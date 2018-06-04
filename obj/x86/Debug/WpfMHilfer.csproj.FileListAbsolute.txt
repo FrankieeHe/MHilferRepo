@@ -57,7 +57,6 @@ C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMH
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.csproj.CopyComplete
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.exe
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.pdb
-C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\de\System.Windows.Interactivity.resources.dll
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\en\System.Windows.Interactivity.resources.dll

@@ -37,7 +37,7 @@ namespace WpfMHilfer.GUI
             this.masterController = masterController;
             this.SearchText = searchText;
             SearchItemLabel.Content = SearchText;
-            List<string> searchResults = masterController.searchController.searchProcedure(SearchText, masterController.hilfer.elements);
+            List<Element> searchResults = masterController.searchController.searchProcedure(SearchText, masterController.hilfer.elements);
         }
 
         
