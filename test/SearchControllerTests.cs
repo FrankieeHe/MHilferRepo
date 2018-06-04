@@ -73,6 +73,7 @@ namespace WpfMHilfer.controller.Tests
         public void SearchProcedureTest()
         {
             List<Element> searched = masterController.searchController.searchProcedure(keywordsExist, masterController.hilfer.elements);
+            Console.WriteLine(searched);
             Assert.That(searched, Is.Not.Empty);
         }
 
@@ -83,8 +84,6 @@ namespace WpfMHilfer.controller.Tests
             Assert.That(searched, Is.Empty);
 
         }
-
-
     }
 
     public class MyFixtureData
@@ -96,6 +95,8 @@ namespace WpfMHilfer.controller.Tests
                 yield return new TestFixtureData("johnson", "oiuhd");
                 yield return new TestFixtureData("Magic player", "notmogic");
                 yield return new TestFixtureData("ok with such good magic","weighted function");
+                //case insensitive search
+                yield return new TestFixtureData("chiyo", "weighted function");
 
             }
         }

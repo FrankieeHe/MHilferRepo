@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,13 +62,14 @@ namespace WpfMHilfer.controller
             foreach (string eleName in pageRankResult)
             {
                 Element element = masterController.elementController.findElement(eleName);
+                CultureInfo culture = CultureInfo.CurrentCulture; 
                 foreach (string keyword in keywordArray)
                 {
-                    if (eleName.Contains(keyword)) {
+                    if (culture.CompareInfo.IndexOf( eleName, keyword, CompareOptions.IgnoreCase)>=0) {
                         searchResult.Insert(0,element);
                         break;
                     }
-                    if (element.desc.Contains(keyword))
+                    if (culture.CompareInfo.IndexOf(element.desc, keyword, CompareOptions.IgnoreCase) >= 0)
                     {
                         searchResult.Add(element);
                         break;
