@@ -3,8 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:domain="clr-namespace:MaterialDesignColors.WpfExample.Domain"
-
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         xmlns:local="clr-namespace:WpfMHilfer.GUI" xmlns:view ="clr-namespace:WpfMHilfer.view" mc:Ignorable="d" TextElement.Foreground="{DynamicResource MaterialDesignBody}" TextElement.FontWeight="Regular"
@@ -12,27 +10,89 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        d:DesignHeight="450" d:DesignWidth="800">
-  <Window.Resources>
-    <ResourceDictionary >
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
-      </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary >
-  </Window.Resources>
-  
-  
-  <Grid Name="SearchResultGird">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"></ColumnDefinition>
-      <ColumnDefinition Width="*"></ColumnDefinition>
-    </Grid.ColumnDefinitions>
-    <TextBox Grid.Column="0" Margin="3,0,3,5">Searched Item</TextBox>
-    <Label x:Name="SearchItemLabel" Grid.Column="0"></Label>
+        d:DesignHeight="800" d:DesignWidth="800">
+    <Window.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Card.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Popupbox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary >
+    </Window.Resources>
 
 
-  </Grid>
+    <Grid Name="SearchResultGird">
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center"  >
+            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Center"
+                     MinWidth="200"
+                     materialDesign:HintAssist.Hint="new Search"></TextBox>
+            <Label x:Name="SearchItemLabel" ></Label>
+
+            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" 
+                        HorizontalAlignment="Right"
+                        Margin="0,7,16,-20" Height="Auto">
+                <materialDesign:PackIcon Kind="FileFind" />
+            </Button>
+        </StackPanel>
+
+
+        <ListView Grid.Row="1">
+            <StackPanel>
+                <smtx:XamlDisplay Key="cards_3" Margin="4 4 0 0" VerticalContentAlignment="Top">
+                    <materialDesign:Card 
+                      Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                      Padding="0"
+                      Width="200">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Margin="16 16 16 4" Background="#03a9f4" FontSize="14" Style="{StaticResource MaterialDesignHeadlineTextBlock}">Call Jennifer</TextBlock>
+                            <Separator Grid.Row="1" Style="{StaticResource MaterialDesignLightSeparator}"/>
+                            <TextBlock Grid.Row="2" Margin="16 0 16 8" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignBody2TextBlock}">March 19, 2016</TextBlock>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="16 0 16 8" HorizontalAlignment="Right">
+                                <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundButton}" Width="30" Padding="2 0 2 0"
+                                materialDesign:RippleAssist.IsCentered="True">
+                                    <materialDesign:PackIcon Kind="OpenInNew" />
+                                </Button>
+                                <materialDesign:PopupBox HorizontalAlignment="Right" Style="{StaticResource MaterialDesignToolForegroundPopupBox}" Padding="2 0 2 0">
+                                    <StackPanel>
+                                        <Button Content="More"/>
+                                        <Button Content="Options"/>
+                                    </StackPanel>
+                                </materialDesign:PopupBox>
+                            </StackPanel>
+                        </Grid>
+                    </materialDesign:Card>
+                </smtx:XamlDisplay>
+            </StackPanel>
+        </ListView>
+        <!--
+            For the Card styled <Flipper />, bring in this resource dictionary (see top of this file)
+            pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Flipper.xaml        
+        -->
+
+
+        <smtx:XamlDisplay  Grid.Row="2" Key="feedback"  VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="44" >
+
+            <StackPanel HorizontalAlignment="Right">
+                <TextBlock   Style="{StaticResource MaterialDesignBody2TextBlock}"> Do you like it?</TextBlock>
+                <Viewbox Margin="0 4 0 8"  Height="16" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <materialDesign:RatingBar Value="4" Orientation="Horizontal" Foreground="Gold" Margin="0" />
+                </Viewbox>
+            </StackPanel>
+        </smtx:XamlDisplay>
+    </Grid>
 </Window>

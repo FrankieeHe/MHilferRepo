@@ -49,7 +49,7 @@ namespace WpfMHilfer.controller
         private Dictionary<string, double> PageRanks;
 
 
-        public List<Element> searchProcedure(string keywords, List<Element> elements)
+        public Dictionary<Element, int> searchProcedure(string keywords, List<Element> elements)
         {
 
             Char[] delimiter = { ' ', ',', '.' };
@@ -57,21 +57,24 @@ namespace WpfMHilfer.controller
             if (keywordArray.Count < 1) { throw new Exception("no valid keywords"); }
 
             List<string> pageRankResult = pagerankProcedure(elements);
-            List<Element> searchResult = new List<Element>();
+            Dictionary<Element,int> searchResult = new Dictionary<Element, int>();
 
+            int i, j;
             foreach (string eleName in pageRankResult)
             {
                 Element element = masterController.elementController.findElement(eleName);
-                CultureInfo culture = CultureInfo.CurrentCulture; 
+                CultureInfo culture = CultureInfo.CurrentCulture;
                 foreach (string keyword in keywordArray)
                 {
-                    if (culture.CompareInfo.IndexOf( eleName, keyword, CompareOptions.IgnoreCase)>=0) {
-                        searchResult.Insert(0,element);
+                    i = culture.CompareInfo.IndexOf(eleName, keyword, CompareOptions.IgnoreCase);
+                    j = culture.CompareInfo.IndexOf(element.desc, keyword, CompareOptions.IgnoreCase);
+                    if (i >= 0 ) {
+                        searchResult.Add(element, 0);
                         break;
                     }
-                    if (culture.CompareInfo.IndexOf(element.desc, keyword, CompareOptions.IgnoreCase) >= 0)
+                    if (j >= 0)
                     {
-                        searchResult.Add(element);
+                        searchResult.Add(element, j);
                         break;
                     }
                 }

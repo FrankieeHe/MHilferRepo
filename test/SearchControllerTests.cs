@@ -72,7 +72,7 @@ namespace WpfMHilfer.controller.Tests
         [Test]
         public void SearchProcedureTest()
         {
-            List<Element> searched = masterController.searchController.searchProcedure(keywordsExist, masterController.hilfer.elements);
+            Dictionary<Element,int> searched = masterController.searchController.searchProcedure(keywordsExist, masterController.hilfer.elements);
             Console.WriteLine(searched);
             Assert.That(searched, Is.Not.Empty);
         }
@@ -80,7 +80,7 @@ namespace WpfMHilfer.controller.Tests
         [Test]
         public void SearchProcedureNullTest()
         {
-            List<Element> searched = masterController.searchController.searchProcedure(NotkeywordsExist, masterController.hilfer.elements);
+            Dictionary<Element, int> searched = masterController.searchController.searchProcedure(NotkeywordsExist, masterController.hilfer.elements);
             Assert.That(searched, Is.Empty);
 
         }
