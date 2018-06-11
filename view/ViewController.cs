@@ -1,4 +1,5 @@
-﻿using MHilfer;
+﻿using MarkdownDeep;
+using MHilfer;
 using MHilfer.controller;
 using MHilfer.model;
 using System;
@@ -22,8 +23,21 @@ namespace WpfMHilfer.view
         private TableSteps _TableStep;
         private ListViewViewModel _ListView;
         private ListViewViewModel _seeAlsoListView;
+        private Markdown markdown;
         private string _Description;
-        public string Description { get { return _Description; } set { _Description = value; OnPropertyChanged("Description"); } }
+        public string Description
+        {
+            get
+            {
+                if (_Description == null)
+                {
+                    return "Welcome!";
+                }
+                else
+                { return _Description; }
+            }
+            set { _Description = value; OnPropertyChanged("Description"); }
+        }
         public ICommand ShiftCommand
         {
             get { return new RelayCommand<object>(ShiftCommandAction); }
@@ -109,7 +123,9 @@ namespace WpfMHilfer.view
         {
             OneClickCommand = new RelayCommand<string>(ClickForDesc);
             DoubleClickCommand = new RelayCommand<string>(EntityUnfold);
-
+            markdown = new MarkdownDeep.Markdown();
+            markdown.ExtraMode = true;
+            markdown.SafeMode = false;
         }
 
         public ViewController(MasterController mc) : this()
@@ -123,7 +139,7 @@ namespace WpfMHilfer.view
         private void ClickForDesc(string obj)
         {
             ParentElement = masterController.elementController.findElement(obj);
-            Description = ParentElement.desc;
+            Description = markdown.Transform(ParentElement.desc);
 
 
             RelevEle relevEle = this.masterController.hilfer.relevEles.Find(rE => rE.element.Equals(ParentElement));
@@ -138,7 +154,8 @@ namespace WpfMHilfer.view
 
             ParentElement = masterController.elementController.findElement(obj);
             Table thistable = masterController.elementController.subTable(ParentElement);
-            if (thistable is null) {
+            if (thistable is null)
+            {
                 thistable = masterController.elementController.preRelation(ParentElement).table;
                 generateListViewNames(thistable);
                 return;
@@ -186,10 +203,12 @@ namespace WpfMHilfer.view
 
         private void EditButtonAction(string obj)
         {
-            try { 
-            AddElementWindow editWindow = new AddElementWindow(masterController, ParentElement);
-            editWindow.Show();
-            }catch(Exception e)
+            try
+            {
+                AddElementWindow editWindow = new AddElementWindow(masterController, ParentElement);
+                editWindow.Show();
+            }
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }

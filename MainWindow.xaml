@@ -17,9 +17,14 @@
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
                 <ResourceDictionary Source="styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightBlue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converter:BoolConverter x:Key="boolConverter"/>
             <converter:ColorConverter x:Key="colorConverter"/>
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -36,7 +41,7 @@
                     <Grid x:Name="HeaderGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4.85*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Button x:Name="Home" Grid.Column="0"
@@ -55,33 +60,26 @@
                                 <MouseBinding Gesture="LeftClick" Command="{Binding HomeButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
 
                         <Button x:Name="Return" Content ="Return" Grid.Column="1"
                                 HorizontalAlignment="Left"
                                 Tag="{Binding ParentElement}"  
-                                Background="{Binding Converter={StaticResource colorConverter},
-                            ElementName=MainPanel,
-                            Path=DataContext.TableStep.actTable.stufe,Mode=TwoWay,
-                            ConverterParameter=0 }" 
-                                Width="{Binding Converter={StaticResource PercentageConverter},
-                                        ElementName=HeaderGrid,
-                                        Path=ActualWidth,
-                                        ConverterParameter=0.235
-                            }">
+                                VerticalAlignment="Center"
+                                Width="Auto"
+                                HorizontalContentAlignment="Left">
                             <Button.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding ReturenButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
                         <Button x:Name="Next" Content="Next" Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                Width="{Binding Converter={StaticResource PercentageConverter},
-                                        ElementName=HeaderGrid,
-                                        Path=ActualWidth,
-                                        ConverterParameter=0.235}" Margin="0,0,3,2" VerticalAlignment="Bottom">
+                                Width="Auto"  
+                                VerticalAlignment="Center">
                             <Button.InputBindings>
                                 <MouseBinding Gesture="LeftClick" Command="{Binding NextButtonCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button, AncestorLevel=1}}"/>
                             </Button.InputBindings>
                         </Button>
+                        </StackPanel>
                         <Label x:Name="ParentLabel" Content="{Binding Path=ParentElement.name}"
                              Grid.Column="2"/>
                     </Grid>
@@ -127,16 +125,13 @@
                                             HorizontalContentAlignment="Center" 
                                             ContextMenuService.IsEnabled="False"
                                             ContextMenuService.ShowOnDisabled="True"
-                                            Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid, AncestorLevel=2}}">
+                                            Tag="{Binding ElementName=MainPanel}">
                                         <Button.InputBindings>
-                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.DoubleClickCommand,
-                                                RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid, AncestorLevel=2}}"
+                                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding Path= DataContext.DoubleClickCommand, ElementName=MainPanel}"
                                                           CommandParameter="{Binding}" />
-                                            <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OneClickCommand,
-                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}"
+                                            <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OneClickCommand, ElementName=MainPanel }"
                                                           CommandParameter="{Binding}"/>
-                                            <MouseBinding Gesture="RightClick" Command="{Binding DataContext.LeftClickCommand,
-                                                RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Grid,AncestorLevel=2}}" 
+                                            <MouseBinding Gesture="RightClick" Command="{Binding DataContext.LeftClickCommand,ElementName=MainPanel }" 
                                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Button,AncestorLevel=1} }" >
                                             </MouseBinding>
                                         </Button.InputBindings>
@@ -146,7 +141,7 @@
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.ShiftCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                           CommandParameter="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
                                                 <MenuItem Header= "Delete"
-                                                          Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand ,RelativeSource={RelativeSource AncestorType=ContextMenu} }"
+                                                          Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                           CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />
 
                                             </ContextMenu>
@@ -159,7 +154,6 @@
                 </StackPanel>
             </DockPanel>
         </Border>
-
         <Grid x:Name="DescriptionPanel" Grid.Column="1" Height="504" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -167,18 +161,18 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox  HorizontalAlignment="Stretch"
-                  HorizontalContentAlignment="Stretch"
-                      VerticalAlignment="Center"
-                  Background="Transparent"
-                  BorderThickness="1"
-                  BorderBrush="LightBlue"
-                  TextAlignment="Left"
-                  IsReadOnly="False"
-                  TextWrapping="Wrap"
-                   Text="{Binding Path=Description, Mode=TwoWay}" Grid.RowSpan="2">
-            </TextBox>
-            <Label Content="See Also:" Grid.Row="1" Margin="30,0,0,30" HorizontalAlignment="Left"/>
+            <WebBrowser Name="DescWebBrowser"
+                        Grid.Row="0"
+                        view:WebBrowserHelper.Body="{Binding Description, Mode=TwoWay}" 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                >
+            </WebBrowser>
+
+            <TextBlock Name="SeeAlsoTextBlock" Text="See Also:"  Grid.Row="1" Margin="30,0,0,30"
+                       Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Left" Height="26" VerticalAlignment="Bottom"
+                       Visibility="{Binding Converter={StaticResource visibilityConverter},ElementName=SeeAlsoListView, Path=Items.Count, ConverterParameter=1 }" />
+
             <ListView x:Name="SeeAlsoListView" BorderBrush="Transparent" Grid.Row="2" Margin="30,0,0,30" HorizontalAlignment="Left"
                       Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.5}"
                       ItemsSource="{Binding SeeAlsoListView.Names}" MaxHeight="118">
@@ -187,7 +181,7 @@
                         <StackPanel>
                             <Button Content="{Binding }" Style="{StaticResource LinkButtonStyle}" 
                                     Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SeeAlsoListView,Path=ActualWidth, ConverterParameter=0.92}" Height="Auto"
-                                    Command="{Binding Path=DataContext.SeeAlsoJumpCommand,  RelativeSource={RelativeSource Mode=FindAncestor,  AncestorType=Grid, AncestorLevel=2}}" 
+                                    Command="{Binding Path=DataContext.SeeAlsoJumpCommand,  ElementName=MainPanel}" 
                                     CommandParameter="{Binding}" />
                         </StackPanel>
                     </DataTemplate>

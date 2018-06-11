@@ -38,9 +38,11 @@ namespace WpfMHilfer
             MainPanel.DataContext = viewController;
             SearchGrid.DataContext = searchViewController;
             searchViewController.SearchBox = SearchBox;
+            DescWebBrowser.NavigateToString(viewController.Description);
+
         }
 
-            
+
         public void addNewElement(object sender, RoutedEventArgs e)
         {
             Window addElementWindow = new AddElementWindow(GetMasterController());
@@ -62,7 +64,6 @@ namespace WpfMHilfer
         {
             masterController.ioController.allSave();
         }
-
 
     }
 }
