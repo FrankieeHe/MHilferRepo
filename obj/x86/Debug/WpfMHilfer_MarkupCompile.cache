@@ -9,12 +9,12 @@ WpfMHilfer
 none
 false
 DEBUG;TRACE
-D:\vs_workspace\MHilferRepo\App.xaml
-4156139335
+D:\vs_workspace\MHilferRepo\GUI\App.xaml
+41023283882
 
-32-1246496571
+33-889181332
 25309340381
-AddElementWindow.xaml;GUI\SearchResultWindow.xaml;MainWindow.xaml;styles.xaml;
+GUI\AddElementWindow.xaml;GUI\SearchResultWindow.xaml;GUI\MainWindow.xaml;GUI\styles.xaml;
 
 False
 

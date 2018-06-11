@@ -144,11 +144,11 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AddElementWindow.xaml">
+    <Page Include="GUI\AddElementWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="GUI\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
@@ -156,20 +156,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="GUI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="styles.xaml">
+    <Page Include="GUI\styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddElementWindow.xaml.cs">
+    <Compile Include="GUI\AddElementWindow.xaml.cs">
       <DependentUpon>AddElementWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="GUI\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="controller\ElementController.cs" />
@@ -181,11 +181,11 @@
     <Compile Include="converter\BoolConverter.cs" />
     <Compile Include="converter\ColorConverter.cs" />
     <Compile Include="converter\VisibilityConverter.cs" />
-    <Compile Include="GUI\SearchResult.xaml.cs">
-      <DependentUpon>SearchResultWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="GUI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\SearchResultWindow.xaml.cs">
+      <DependentUpon>SearchResultWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="model\Element.cs" />
     <Compile Include="model\Hilfer.cs" />
@@ -195,16 +195,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
-    <Compile Include="view\AddElementViewModel.cs" />
-    <Compile Include="view\ComboBoxViewModel.cs" />
+    <Compile Include="viewmodel\AddElementViewModel.cs" />
+    <Compile Include="viewmodel\ComboBoxViewModel.cs" />
+    <Compile Include="view\DoppelListView.cs" />
     <Compile Include="view\ListViewViewModel.cs" />
     <Compile Include="view\ObservableObject.cs" />
-    <Compile Include="view\PercentageConverter.cs" />
+    <Compile Include="converter\PercentageConverter.cs" />
     <Compile Include="view\RelayCommand.cs" />
-    <Compile Include="view\SearchResultViewModel.cs" />
-    <Compile Include="view\SearchViewController.cs" />
+    <Compile Include="viewmodel\SearchResultViewModel.cs" />
+    <Compile Include="viewmodel\SearchViewController.cs" />
     <Compile Include="view\TableSteps.cs" />
-    <Compile Include="view\ViewController.cs" />
+    <Compile Include="viewmodel\ViewController.cs" />
     <Compile Include="view\WebBrowserHelper.cs" />
   </ItemGroup>
   <ItemGroup>

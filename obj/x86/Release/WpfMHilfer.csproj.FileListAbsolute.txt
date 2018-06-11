@@ -27,3 +27,10 @@ C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Release\Wpf
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Release\WpfMHilfer.csproj.CopyComplete
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Release\WpfMHilfer.exe
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Release\WpfMHilfer.pdb
+D:\vs_workspace\MHilferRepo\obj\x86\Release\WpfMHilfer.csprojResolveAssemblyReference.cache
+D:\vs_workspace\MHilferRepo\obj\x86\Release\GUI\AddElementWindow.g.cs
+D:\vs_workspace\MHilferRepo\obj\x86\Release\GUI\SearchResultWindow.g.cs
+D:\vs_workspace\MHilferRepo\obj\x86\Release\GUI\App.g.cs
+D:\vs_workspace\MHilferRepo\obj\x86\Release\GeneratedInternalTypeHelper.g.cs
+D:\vs_workspace\MHilferRepo\obj\x86\Release\WpfMHilfer_MarkupCompile.cache
+D:\vs_workspace\MHilferRepo\obj\x86\Release\WpfMHilfer_MarkupCompile.lref

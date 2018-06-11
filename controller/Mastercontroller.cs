@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WpfMHilfer.controller;
 using WpfMHilfer.model;
 using WpfMHilfer.view;
+using WpfMHilfer.viewmodel;
 
 namespace MHilfer.controller
 {
