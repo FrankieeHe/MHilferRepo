@@ -155,10 +155,9 @@
                 </StackPanel>
             </DockPanel>
         </Border>
-        <Grid x:Name="DescriptionPanel" Grid.Column="1" Height="504" VerticalAlignment="Top">
+        <Grid x:Name="DescriptionPanel" Grid.Column="1" VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
@@ -188,61 +187,63 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Grid Name="SearchGrid" Grid.Row="3"  VerticalAlignment="Bottom" HorizontalAlignment="Center" 
+
+        </Grid>
+        <Grid Name="SearchGrid" Grid.Column="1"  VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                   Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=DescriptionPanel, Path=ActualWidth, ConverterParameter=0.6}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox  Name="SearchBox" Grid.Column="0"  HorizontalAlignment="Left" VerticalContentAlignment="Bottom" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox  Name="SearchBox" Grid.Column="0"  HorizontalAlignment="Left" VerticalContentAlignment="Bottom" 
                           BorderThickness="2px" 
                           TextWrapping="Wrap" Height="35" Width="{Binding Converter={StaticResource PercentageConverter}, ElementName=SearchGrid,Path=ActualWidth,ConverterParameter=0.86}"  
                           Text="{Binding DataContext.SearchText, Mode=TwoWay,ElementName=SearchGrid}" VerticalAlignment="Center" >
-                    <TextBox.Style>
-                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <Style.Resources>
-                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                    <VisualBrush.Visual>
-                                        <Label Content="Search" Foreground="LightGray" FontStyle="Italic"></Label>
-                                    </VisualBrush.Visual>
-                                </VisualBrush>
-                            </Style.Resources>
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
-                                </Trigger>
-                                <Trigger Property="Text" Value="{x:Null}">
-                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
-                                </Trigger>
-                                <Trigger Property="IsKeyboardFocused" Value="True">
-                                    <Setter Property="Background" Value="White"></Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                    <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding SearchTextBoxEnterCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
-                    </TextBox.InputBindings>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command= "{Binding SearchBox_GotFocus, Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="GotMouseCapture">
-                            <i:InvokeCommandAction Command="{Binding SearchTextBox_GotMouseCapture , Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <Button Grid.Column="1" Style="{DynamicResource NoChromeButton}"  Width="40" Command="{Binding SearchButtonCommand}" CommandParameter="{Binding ElementName=SearchBox}">
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Image Source="/resources/search.png" />
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-            </Grid>
+                <TextBox.Style>
+                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                        <Style.Resources>
+                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                <VisualBrush.Visual>
+                                    <Label Content="Search" Foreground="LightGray" FontStyle="Italic"></Label>
+                                </VisualBrush.Visual>
+                            </VisualBrush>
+                        </Style.Resources>
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
+                            </Trigger>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Background" Value="White"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchTextBoxEnterCommand, Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
+                </TextBox.InputBindings>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus">
+                        <i:InvokeCommandAction Command= "{Binding SearchBox_GotFocus, Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="GotMouseCapture">
+                        <i:InvokeCommandAction Command="{Binding SearchTextBox_GotMouseCapture , Mode=OneWay}" CommandParameter="{Binding ElementName=SearchBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <Button Grid.Column="1" Style="{DynamicResource NoChromeButton}"  
+                        Width="40" Command="{Binding SearchButtonCommand}"  
+                        CommandParameter="{Binding ElementName=SearchBox}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/resources/search.png" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
-
-        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Grid.Column="1" Grid.Row="1">
+        <Button x:Name="EditButton" Content="Edit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource MaterialDesignFloatingActionLightButton}" Grid.Column="1" >
             <Button.InputBindings>
                 <MouseBinding Gesture="LeftClick" Command="{Binding EditButtonCommand}" CommandParameter="">
                 </MouseBinding>
