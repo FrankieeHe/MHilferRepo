@@ -1,0 +1,2 @@
+D:\vs_workspace\MHilferRepo\test\obj\Release\test.csprojResolveAssemblyReference.cache
+D:\vs_workspace\MHilferRepo\test\obj\Release\test.csproj.CoreCompileInputs.cache

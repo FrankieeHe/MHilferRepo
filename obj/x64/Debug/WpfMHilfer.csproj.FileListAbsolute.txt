@@ -1,0 +1,7 @@
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\AddElementWindow.g.cs
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\GUI\SearchResultWindow.g.cs
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\App.g.cs
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\GeneratedInternalTypeHelper.g.cs
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\WpfMHilfer_MarkupCompile.cache
+D:\vs_workspace\MHilferRepo\obj\x64\Debug\WpfMHilfer_MarkupCompile.lref
