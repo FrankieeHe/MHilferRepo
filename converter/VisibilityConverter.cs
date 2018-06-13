@@ -10,6 +10,8 @@ namespace WpfMHilfer.converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int number = System.Convert.ToInt16(value);
+            int par = System.Convert.ToInt16(parameter);
+            if (par == 0) { return number == 0 ? Visibility.Visible:Visibility.Collapsed ; }
             return number == 0 ? Visibility.Hidden : Visibility.Visible;
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using MHilfer;
 using MHilfer.controller;
@@ -22,11 +23,24 @@ namespace WpfMHilfer.viewmodel
         {
             get { return new RelayCommand<object>(addAction); }
         }
-
+        public ICommand ImportDescCommand
+        {
+            get { return new RelayCommand<object>(ImportDescAction); }
+        }
         public ICommand removeCommand
         {
             get { return new RelayCommand<object>(removeAction); }
         }
+
+        private void ImportDescAction(object obj)
+        {
+            Button button = (Button)obj;
+            if(ImportDescURLText.Length != 0) { button.Content = "Import Desc"; ImportDescURLText = ""; return; }
+            string filename = masterController.ioController.loadMD();
+            ImportDescURLText = filename;
+            button.Content = "Remove Import";
+        }
+
         private string _SelectedName;
 
         public string SelectedName
@@ -35,7 +49,12 @@ namespace WpfMHilfer.viewmodel
             set { this._SelectedName = value; OnPropertyChanged("SelectedName"); }
         }
         private string _ToRemoveName;
-
+        private string _ImportDescURLText;
+        public string ImportDescURLText
+        {
+            get { if (_ImportDescURLText == null || _ImportDescURLText.Length == 0) { return (""); } else { return _ImportDescURLText; } }
+            set { this._ImportDescURLText = value; OnPropertyChanged("ImportDescURLText"); }
+        }
         public string ToRemoveName
         {
             get { return _ToRemoveName; }

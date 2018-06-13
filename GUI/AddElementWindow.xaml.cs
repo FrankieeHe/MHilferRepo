@@ -67,10 +67,23 @@ namespace WpfMHilfer.GUI
             try
             {
                 string nameTextBox = NameTextBox.Text;
+                if (Regex.Match(nameTextBox, @"(^\s+)|(^$)").Success) { MessageBox.Show("name is required"); return; }
                 Element parentEle = (Element)EntitiesComboBox.SelectedItem;
                 string descTextBox = DescriptionTextBox.Text;
-                if (Regex.Match(nameTextBox, @"(^\s+)|(^$)").Success) { MessageBox.Show("name is required"); return; }
-                Element childEle = new Element(nameTextBox, descTextBox);
+                Element childEle;
+                childEle = new Element(nameTextBox, descTextBox);
+                if (descTextBox.Length == 0)
+                {
+                    string urlTextBox = ImportDescURL.Text;
+                    if (urlTextBox.Length != 0)
+                    {
+                        masterController.ioController.copyToLocal(urlTextBox, nameTextBox);
+                        childEle = new Element(nameTextBox, new Uri(masterController.ioController.mdFileDir , nameTextBox).AbsolutePath, true);
+
+                    }
+                }
+
+
                 masterController.elementController.addNewElement(childEle);
                 masterController.elementController.addElementToParent(childEle, parentEle);
 
@@ -94,7 +107,18 @@ namespace WpfMHilfer.GUI
         {
             string nameTextBox = NameTextBox.Text;
             string descTextBox = DescriptionTextBox.Text;
-            
+
+            if (descTextBox.Length == 0)
+            {
+                string urlTextBox = ImportDescURL.Text;
+                if (urlTextBox.Length != 0)
+                {
+                    masterController.ioController.copyToLocal(urlTextBox, nameTextBox);
+                    descTextBox = new Uri(masterController.ioController.mdFileDir, nameTextBox).AbsolutePath;
+                    masterController.elementController.findElement(nameTextBox).url = true;
+                }
+            }
+
             masterController.elementController.overrideElement(nameTextBox, descTextBox);
             //add reset and actuallization
             addElementViewModel.update_SelectedRelevs(masterController.elementController.findElement(nameTextBox));

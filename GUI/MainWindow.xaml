@@ -132,7 +132,7 @@
                                                           CommandParameter="{Binding}" />
                                             <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OneClickCommand, ElementName=MainPanel }"
                                                           CommandParameter="{Binding}"/>
-                                            <MouseBinding Gesture="RightClick" Command="{Binding DataContext.LeftClickCommand,ElementName=MainPanel }" 
+                                            <MouseBinding Gesture="RightClick" Command="{Binding DataContext.RightClickCommand,ElementName=MainPanel }" 
                                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode =FindAncestor, AncestorType=Button,AncestorLevel=1} }" >
                                             </MouseBinding>
                                         </Button.InputBindings>
@@ -164,6 +164,7 @@
             <WebBrowser Name="DescWebBrowser"
                         Grid.Row="0"
                         view:WebBrowserHelper.Body="{Binding Description, Mode=TwoWay}" 
+                        view:WebBrowserHelper.Url="{Binding Descrition, Mode=TwoWay}"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 >

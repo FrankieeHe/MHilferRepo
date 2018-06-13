@@ -77,3 +77,7 @@ D:\vs_workspace\MHilferRepo\test\bin\Debug\MarkdownDeep.pdb
 D:\vs_workspace\MHilferRepo\test\obj\Debug\test.csproj.CopyComplete
 D:\vs_workspace\MHilferRepo\test\obj\Debug\test.dll
 D:\vs_workspace\MHilferRepo\test\obj\Debug\test.pdb
+C:\Users\donghui.he\source\repos\MHilferRepo\test\bin\Debug\resources\desc\text2.md
+C:\Users\donghui.he\source\repos\MHilferRepo\test\bin\Debug\resources\desc\text1.md
+C:\Users\donghui.he\source\repos\MHilferRepo\test\bin\Debug\MarkdownDeep.dll
+C:\Users\donghui.he\source\repos\MHilferRepo\test\bin\Debug\MarkdownDeep.pdb

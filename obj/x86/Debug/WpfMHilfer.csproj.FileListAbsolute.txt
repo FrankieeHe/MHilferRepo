@@ -47,10 +47,7 @@ C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\MaterialD
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\obj\x86\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
 C:\Users\donghui.he\source\repos\Versions\MHilfer\WpfMHilfer\bin\Debug\ShowMeTheXAML.dll
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer.csprojResolveAssemblyReference.cache
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\AddElementWindow.g.cs
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\SearchResultWindow.g.cs
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\MainWindow.g.cs
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\App.g.cs
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer_MarkupCompile.cache
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer_MarkupCompile.lref
@@ -83,11 +80,7 @@ C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\ko\System.Windows.Interac
 C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\ru\System.Windows.Interactivity.resources.dll
 C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\App.baml
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\AddElementWindow.baml
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\SearchResultWindow.baml
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\MainWindow.baml
-C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\styles.baml
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer.g.resources
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer.Properties.Resources.resources
 C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\WpfMHilfer.csproj.GenerateResource.cache
@@ -131,3 +124,14 @@ D:\vs_workspace\MHilferRepo\obj\x86\Debug\WpfMHilfer.csproj.CoreCompileInputs.ca
 D:\vs_workspace\MHilferRepo\obj\x86\Debug\WpfMHilfer.csproj.CopyComplete
 D:\vs_workspace\MHilferRepo\obj\x86\Debug\WpfMHilfer.exe
 D:\vs_workspace\MHilferRepo\obj\x86\Debug\WpfMHilfer.pdb
+C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\MarkdownDeep.dll
+C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\MarkdownDeep.pdb
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\AddElementWindow.g.cs
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\MainWindow.g.cs
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\App.g.cs
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\App.baml
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\AddElementWindow.baml
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\MainWindow.baml
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\GUI\styles.baml
+C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\resources\desc\text1.md
+C:\Users\donghui.he\source\repos\MHilferRepo\bin\Debug\resources\desc\text2.md

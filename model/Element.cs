@@ -12,12 +12,20 @@ namespace MHilfer
     [JsonObject(MemberSerialization.OptIn)]
     public class Element
     {
- 
+        [JsonProperty(Required = Required.AllowNull)]
+        public bool url;
 
         public Element(string n, string d)
         {
             this.name = n;
             this.desc = d;
+            this.url = false;
+        }
+
+        [JsonConstructor]
+        public Element(string n, string d, bool v) : this(n, d)
+        {
+            this.url = v;
         }
 
         [JsonProperty]

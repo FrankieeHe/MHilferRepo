@@ -22,7 +22,10 @@ namespace MHilfer.controller
         public void setMasterController(MasterController mc)
         {
             this.masterController = mc;
+            mdFileDir = new Uri(new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase)), "res");
+            Directory.CreateDirectory(mdFileDir.AbsolutePath);
         }
+        public Uri mdFileDir { get; set; }
 
         public void allSave()
         {
@@ -48,9 +51,9 @@ namespace MHilfer.controller
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.DefaultExt = "json";
+            saveFileDialog.Filter = "JSON file (*.json)|*.json";
             if (saveFileDialog.ShowDialog() == true)
             {
-                saveFileDialog.Filter = "JSON file (*.json)|*.json";
                 File.WriteAllText(saveFileDialog.FileName, @jsonAll.ToString());
             }
 
@@ -58,44 +61,70 @@ namespace MHilfer.controller
 
         }
 
+        public string loadMD()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "text file (*.md)|*.md";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string mdfileName = openFileDialog.FileName;
+                return mdfileName;
+            }
+            return null;
+        }
+
+        public void copyToLocal(string filename, string elementname)
+        {
+
+            System.IO.File.Copy(filename,  (new Uri(mdFileDir, elementname)).AbsolutePath );
+        }
+
         public void loadAll()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON file (*.json)|*.json";
             if (openFileDialog.ShowDialog() == true)
             {
-                string jsonAll = File.ReadAllText(openFileDialog.FileName);
-                JObject json = JObject.Parse(jsonAll);
-                string jelements = (string)json["elementJson"];
-
-                List<Element> elements = JsonConvert.DeserializeObject<List<Element>>(jelements, new JsonSerializerSettings
+                try
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.All
-                });
+                    string jsonAll = File.ReadAllText(openFileDialog.FileName);
+                    JObject json = JObject.Parse(jsonAll);
+                    string jelements = (string)json["elementJson"];
 
-                string jtables = (string)json["tablesJson"];
-                List<Table> tables = JsonConvert.DeserializeObject<List<Table>>(jtables, new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.All
-                });
-
-                string jrelations = (string)json["relationsJson"];
-                List<Relation> relations = JsonConvert.DeserializeObject<List<Relation>>(jrelations, new JsonSerializerSettings
-                {
-                    PreserveReferencesHandling = PreserveReferencesHandling.All
-                });
-
-                string jrelevEles = (string)json["relevElesJson"];
-                if (jrelevEles != null)
-                {
-                    List<RelevEle> relevEles = JsonConvert.DeserializeObject<List<RelevEle>>(jrelevEles, new JsonSerializerSettings
+                    List<Element> elements = JsonConvert.DeserializeObject<List<Element>>(jelements, new JsonSerializerSettings
                     {
                         PreserveReferencesHandling = PreserveReferencesHandling.All
                     });
-                    this.masterController.hilfer.relevEles = relevEles;
+
+                    string jtables = (string)json["tablesJson"];
+                    List<Table> tables = JsonConvert.DeserializeObject<List<Table>>(jtables, new JsonSerializerSettings
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.All
+                    });
+
+                    string jrelations = (string)json["relationsJson"];
+                    List<Relation> relations = JsonConvert.DeserializeObject<List<Relation>>(jrelations, new JsonSerializerSettings
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.All
+                    });
+
+                    string jrelevEles = (string)json["relevElesJson"];
+                    if (jrelevEles != null)
+                    {
+                        List<RelevEle> relevEles = JsonConvert.DeserializeObject<List<RelevEle>>(jrelevEles, new JsonSerializerSettings
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.All
+                        });
+                        this.masterController.hilfer.relevEles = relevEles;
+                    }
+                    this.masterController.hilfer.elements = elements;
+                    this.masterController.hilfer.tables = tables;
+                    this.masterController.hilfer.relations = relations;
                 }
-                this.masterController.hilfer.elements = elements;
-                this.masterController.hilfer.tables = tables;
-                this.masterController.hilfer.relations = relations;
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
         }
 

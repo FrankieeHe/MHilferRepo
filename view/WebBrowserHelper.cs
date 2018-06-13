@@ -26,7 +26,31 @@ namespace WpfMHilfer.view
         private static void OnBodyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var webBrowser = (WebBrowser)d;
-            webBrowser.NavigateToString((string)e.NewValue);
+            if(((string)e.NewValue).Length ==0) { return; }
+            string desc = (string)e.NewValue;
+            webBrowser.NavigateToString(desc);
+        }
+
+
+        public static readonly DependencyProperty UrlProperty =
+           DependencyProperty.RegisterAttached("Url", typeof(string), typeof(WebBrowserHelper), new PropertyMetadata(OnUrlChanged));
+
+        public static string GetUrl(DependencyObject dependencyObject)
+        {
+            return (string)dependencyObject.GetValue(UrlProperty);
+        }
+
+        public static void SetUrl(DependencyObject dependencyObject, string Url)
+        {
+            dependencyObject.SetValue(UrlProperty, Url);
+        }
+
+        private static void OnUrlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            WebBrowser webBrowser = (WebBrowser)d;
+
+            string desc = (string)e.NewValue;
+            webBrowser.Navigate(desc);
         }
     }
 }

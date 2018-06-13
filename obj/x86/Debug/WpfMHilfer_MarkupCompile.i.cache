@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\vs_workspace\MHilferRepo\obj\x86\Debug\
+C:\Users\donghui.he\source\repos\MHilferRepo\obj\x86\Debug\
 WpfMHilfer
 none
 false
 DEBUG;TRACE
-D:\vs_workspace\MHilferRepo\GUI\App.xaml
+C:\Users\donghui.he\source\repos\MHilferRepo\GUI\App.xaml
 41023283882
 
-38-725875358
-25309340381
+381736333657
+25-1670590624
 GUI\AddElementWindow.xaml;GUI\SearchResultWindow.xaml;GUI\MainWindow.xaml;GUI\styles.xaml;
 
 False

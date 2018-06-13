@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMHilfer.GUI"
+        xmlns:converter="clr-namespace:WpfMHilfer.converter"
         xmlns:viewmodel="clr-namespace:WpfMHilfer.viewmodel"
         mc:Ignorable="d"
         Title="AddElementWindow" Height="450" Width="800">
@@ -11,21 +12,32 @@
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries >
                 <ResourceDictionary Source="styles.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ListBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightBlue.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converter:VisibilityConverter x:Key="visibilityConverter" />
             <viewmodel:AddElementViewModel x:Key="addElementVM"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="AddElementGrid">
         <StackPanel>
-            <TextBlock  Text="New Entity Name:"/>
+            <TextBlock  Text="New Entity Name:" Style="{StaticResource MaterialDesignHeadlineTextBlock}" />
             <TextBox  x:Name="NameTextBox"></TextBox>
-            <TextBlock Text="Bind to:"></TextBlock>
+            <TextBlock Text="Bind to:" Style="{StaticResource MaterialDesignHeadlineTextBlock}" ></TextBlock>
             <ComboBox x:Name="EntitiesComboBox"
                           Text="entities..."
                       IsEditable="True"
                           />
-            <TextBlock Text="Description(Optional):"/>
-            <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" AcceptsTab="True" MinLines="5" MaxLines="20"></TextBox>
+            <TextBlock Text="Description(Optional):" Style="{StaticResource MaterialDesignHeadlineTextBlock}" Margin="0 2 0 4" />
+            <StackPanel Orientation="Horizontal" Visibility="{Binding Converter={StaticResource visibilityConverter},ElementName=DescriptionTextBox, Path=Text.Length, ConverterParameter=0 }">
+                <Button x:Name="ImportDescButton" Width="Auto" Content="Import Describtion" Command="{Binding ImportDescCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+                <TextBlock x:Name="ImportDescURL" Text="{Binding ImportDescURLText, Mode=TwoWay}" VerticalAlignment="Center" Margin="10 0 0 0"></TextBlock>
+            </StackPanel>
+            <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" Margin="0 5 0 5" AcceptsTab="True" MinLines="5" MaxHeight="300" 
+                     Visibility="{Binding Converter={StaticResource visibilityConverter},ElementName=ImportDescURL, Path=Text.Length, ConverterParameter=0 }"></TextBox>
+            <Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="8 4 8 4"/>
             <Grid x:Name="relevantElesGrid" >
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="0.5*"/>
@@ -34,26 +46,33 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="1">
-                    <TextBlock  Text="Entities" ></TextBlock>
-                    <ListBox x:Name="allEntitiesListBox" ItemsSource="{Binding Path=RelevEleListView.Names}"
+                <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="1"  >
+                    <StackPanel Grid.Column="1">
+                        <TextBlock  Text="Entities:" Style="{StaticResource MaterialDesignHeadlineTextBlock}" ></TextBlock>
+                        <Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" />
+
+                        <ListBox x:Name="allEntitiesListBox" ItemsSource="{Binding Path=RelevEleListView.Names}" 
                              SelectedItem="{Binding Path=SelectedName}"
                              MinHeight="100" MaxHeight="180" VerticalAlignment="Bottom"
                              ItemTemplate="{StaticResource GlobalListViewTemplate}">
-                    </ListBox>
-                </StackPanel>
-                <StackPanel Grid.Column="2" Orientation="Vertical">
-                    <Button Content="Add" Margin="3,20,3,3" Command="{Binding Path=addCommand}" CommandParameter=""></Button>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                    <Button Content="Add"  Command="{Binding Path=addCommand}" CommandParameter=""></Button>
                     <Button Content="Remove" Command="{Binding Path=removeCommand}" CommandParameter="" ></Button>
                 </StackPanel>
-                <StackPanel Grid.Column="3">
-                    <TextBlock Text="Seleted Relevant:"></TextBlock>
-                    <ListBox x:Name="selectedEntitiesListBox" MinHeight="100" MaxHeight="180" Grid.Column="3"
+                <Border CornerRadius="5" BorderBrush="Gray"  BorderThickness="2" Grid.Column="3"  >
+                    <StackPanel>
+                        <TextBlock Text="Seleted Relevant:" Style="{StaticResource MaterialDesignHeadlineTextBlock}" ></TextBlock>
+                        <Separator Grid.Row="2" Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <ListBox x:Name="selectedEntitiesListBox" MinHeight="100" MaxHeight="180" Grid.Column="3" Style="{StaticResource MaterialDesignToolToggleFlatListBox}"
                              ItemsSource="{Binding Path=SelectedRelevEleListView.Names }"  
                              SelectedItem="{Binding ToRemoveName}"
                              ItemTemplate="{StaticResource GlobalListViewTemplate}"
                               ></ListBox>
-                </StackPanel>
+                    </StackPanel>
+                </Border>
             </Grid>
 
             <StackPanel  Orientation="Horizontal" FlowDirection="RightToLeft">

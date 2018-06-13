@@ -55,8 +55,15 @@ namespace WpfMHilfer.GUI
 
         private void LocalLoad(object sender, RoutedEventArgs e)
         {
-            masterController.ioController.loadAll();
-            viewController.generateListViewNames(null);
+            try
+            {
+                masterController.ioController.loadAll();
+                viewController.generateListViewNames(null);
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show("File Loading Error: \n"+E.Message);
+            }
         }
 
         private void LocalSave(object sender, RoutedEventArgs e)

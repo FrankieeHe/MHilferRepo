@@ -5,7 +5,9 @@ using MHilfer.model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +35,7 @@ namespace WpfMHilfer.viewmodel
             {
                 if (_Description == null)
                 {
-                    return "Welcome!";
+                    return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase); ;
                 }
                 else
                 { return _Description; }
@@ -63,9 +65,9 @@ namespace WpfMHilfer.viewmodel
             get { return new RelayCommand<string>(SeeAlsoJumpAction); }
         }
 
-        public ICommand LeftClickCommand
+        public ICommand RightClickCommand
         {
-            get { return new RelayCommand<object>(LeftClickAction); }
+            get { return new RelayCommand<object>(RightClickCommandAction); }
         }
         public ICommand DeleteCommand
         {
@@ -141,12 +143,21 @@ namespace WpfMHilfer.viewmodel
         private void ClickForDesc(string obj)
         {
             ParentElement = masterController.elementController.findElement(obj);
-            Description = markdown.Transform(ParentElement.desc);
 
-
+            if (ParentElement.url == true)
+            {
+                Description = ParentElement.desc;
+            }
+            else
+            {
+                Description = markdown.Transform(ParentElement.desc);
+            }
             RelevEle relevEle = this.masterController.hilfer.relevEles.Find(rE => rE.element.Equals(ParentElement));
             List<string> caListView = new List<string>();
-            if (relevEle != null) { caListView = relevEle.relevantElements; }
+            if (relevEle != null)
+            {
+                caListView = relevEle.relevantElements;
+            }
             SeeAlsoListView = new ListViewViewModel(caListView);
 
         }
@@ -216,7 +227,7 @@ namespace WpfMHilfer.viewmodel
             }
         }
 
-        private void LeftClickAction(object sender)
+        private void RightClickCommandAction(object sender)
         {
             Button button = (Button)sender;
             string nam = (string)(button.Content);
