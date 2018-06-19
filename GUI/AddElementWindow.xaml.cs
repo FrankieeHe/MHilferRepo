@@ -36,6 +36,8 @@ namespace WpfMHilfer.GUI
             InitializeComponent();
             masterController = mc;
             viewController = masterController.viewController;
+            masterController.addElementViewModel = new AddElementViewModel();
+            masterController.addElementViewModel.setMasterController(masterController);
             addElementViewModel = masterController.addElementViewModel;
             comboBoxViewModel = new ComboBoxViewModel(new ObservableCollection<Element>(masterController.hilfer.elements));
             EntitiesComboBox.ItemsSource = comboBoxViewModel.elements;
@@ -51,7 +53,15 @@ namespace WpfMHilfer.GUI
         public AddElementWindow(MasterController mc, Element parentElement) : this(mc)
         {
             NameTextBox.Text = parentElement.name;
-            DescriptionTextBox.Text = parentElement.desc;
+            if(parentElement.url == true)
+            {
+                DescriptionTextBox.Text = "";
+                addElementViewModel.ImportDescURLText = parentElement.desc;
+            }
+            else {
+                addElementViewModel.ImportDescURLText = "";
+                DescriptionTextBox.Text = parentElement.desc;
+            }
             EntitiesComboBox.SelectedItem = masterController.elementController.getPreElement(parentElement);
             NameTextBox.IsReadOnly = true;
             EntitiesComboBox.IsReadOnly = true;
@@ -77,8 +87,9 @@ namespace WpfMHilfer.GUI
                     string urlTextBox = ImportDescURL.Text;
                     if (urlTextBox.Length != 0)
                     {
-                        masterController.ioController.copyToLocal(urlTextBox, nameTextBox);
-                        childEle = new Element(nameTextBox, new Uri(masterController.ioController.mdFileDir , nameTextBox).AbsolutePath, true);
+                        nameTextBox = nameTextBox + '.' + get_type(urlTextBox);
+                        masterController.ioController.copyToLocal(urlTextBox, nameTextBox );
+                        childEle = new Element(NameTextBox.Text, new Uri(masterController.ioController.mdFileDir , nameTextBox).AbsolutePath, true);
 
                     }
                 }
@@ -103,6 +114,12 @@ namespace WpfMHilfer.GUI
             this.Close();
         }
 
+        private string get_type(string url)
+        {
+
+            return url.Split('.').Last();
+        }
+
         private void EditSave_Click(object sender, RoutedEventArgs e)
         {
             string nameTextBox = NameTextBox.Text;
@@ -113,15 +130,16 @@ namespace WpfMHilfer.GUI
                 string urlTextBox = ImportDescURL.Text;
                 if (urlTextBox.Length != 0)
                 {
+                    nameTextBox = nameTextBox + '.' + get_type(urlTextBox);
                     masterController.ioController.copyToLocal(urlTextBox, nameTextBox);
                     descTextBox = new Uri(masterController.ioController.mdFileDir, nameTextBox).AbsolutePath;
-                    masterController.elementController.findElement(nameTextBox).url = true;
+                    masterController.elementController.findElement(NameTextBox.Text).url = true;
                 }
             }
 
-            masterController.elementController.overrideElement(nameTextBox, descTextBox);
+            masterController.elementController.overrideElement(NameTextBox.Text, descTextBox);
             //add reset and actuallization
-            addElementViewModel.update_SelectedRelevs(masterController.elementController.findElement(nameTextBox));
+            addElementViewModel.update_SelectedRelevs(masterController.elementController.findElement(NameTextBox.Text));
             viewController.Description = descTextBox;
             this.Close();
         }

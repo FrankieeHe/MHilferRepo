@@ -164,7 +164,7 @@
             <WebBrowser Name="DescWebBrowser"
                         Grid.Row="0"
                         view:WebBrowserHelper.Body="{Binding Description, Mode=TwoWay}" 
-                        view:WebBrowserHelper.Url="{Binding Descrition, Mode=TwoWay}"
+                        view:WebBrowserHelper.Url="{Binding DescUrl, Mode=TwoWay}"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Center"
                 >

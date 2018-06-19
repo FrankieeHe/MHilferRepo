@@ -42,6 +42,22 @@ namespace WpfMHilfer.viewmodel
             }
             set { _Description = value; OnPropertyChanged("Description"); }
         }
+        private string _DescUrl;
+        public string DescUrl
+        {
+            get
+            {
+                if (_DescUrl == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _DescUrl;
+                }
+            }
+            set { _DescUrl = value; OnPropertyChanged("DescUrl"); }
+        }
         public ICommand ShiftCommand
         {
             get { return new RelayCommand<object>(ShiftCommandAction); }
@@ -146,7 +162,18 @@ namespace WpfMHilfer.viewmodel
 
             if (ParentElement.url == true)
             {
-                Description = ParentElement.desc;
+                string file = ParentElement.desc;
+                if (file.Split('.').Last() == "md")
+                {
+
+                    string transformhtml = markdown.Transform(File.ReadAllText(file));
+                    file = file.Substring(0,file.LastIndexOf('.'));
+                    File.WriteAllText(file + ".html", transformhtml);
+                    ParentElement.desc = file + ".html";
+                }
+
+                DescUrl = ParentElement.desc;
+
             }
             else
             {

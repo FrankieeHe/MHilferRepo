@@ -36,7 +36,7 @@ namespace WpfMHilfer.viewmodel
         {
             Button button = (Button)obj;
             if(ImportDescURLText.Length != 0) { button.Content = "Import Desc"; ImportDescURLText = ""; return; }
-            string filename = masterController.ioController.loadMD();
+            string filename = masterController.ioController.loadMD_Or_HTML();
             ImportDescURLText = filename;
             button.Content = "Remove Import";
         }

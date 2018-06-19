@@ -61,10 +61,10 @@ namespace MHilfer.controller
 
         }
 
-        public string loadMD()
+        public string loadMD_Or_HTML()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "text file (*.md)|*.md";
+            openFileDialog.Filter = "text file (*.md;*.html)|*.md;*.html";
             if (openFileDialog.ShowDialog() == true)
             {
                 string mdfileName = openFileDialog.FileName;
@@ -75,7 +75,7 @@ namespace MHilfer.controller
 
         public void copyToLocal(string filename, string elementname)
         {
-
+            if(File.Exists(new Uri(mdFileDir, elementname).AbsolutePath)) { return; }
             System.IO.File.Copy(filename,  (new Uri(mdFileDir, elementname)).AbsolutePath );
         }
 

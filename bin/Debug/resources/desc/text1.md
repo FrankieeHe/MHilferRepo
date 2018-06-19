@@ -1,2 +1,2 @@
 ﻿#head
-![image](search.png)
+![image](./search.png)
