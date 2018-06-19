@@ -64,7 +64,7 @@ namespace MHilfer.controller
         public string loadMD_Or_HTML()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "text file (*.md;*.html)|*.md;*.html";
+            openFileDialog.Filter = "text file (*.md;*.html;*.pdf)|*.md;*.html;*.pdf";
             if (openFileDialog.ShowDialog() == true)
             {
                 string mdfileName = openFileDialog.FileName;

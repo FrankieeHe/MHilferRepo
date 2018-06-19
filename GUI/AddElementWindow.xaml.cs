@@ -90,10 +90,8 @@ namespace WpfMHilfer.GUI
                         nameTextBox = nameTextBox + '.' + get_type(urlTextBox);
                         masterController.ioController.copyToLocal(urlTextBox, nameTextBox );
                         childEle = new Element(NameTextBox.Text, new Uri(masterController.ioController.mdFileDir , nameTextBox).AbsolutePath, true);
-
                     }
                 }
-
 
                 masterController.elementController.addNewElement(childEle);
                 masterController.elementController.addElementToParent(childEle, parentEle);
