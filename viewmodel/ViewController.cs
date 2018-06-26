@@ -35,7 +35,7 @@ namespace WpfMHilfer.viewmodel
             {
                 if (_Description == null)
                 {
-                    return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase); ;
+                    return "PWD: " + Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase); ;
                 }
                 else
                 { return _Description; }
@@ -277,6 +277,8 @@ namespace WpfMHilfer.viewmodel
 
                 masterController.elementController.removeElement(ele);
                 masterController.relevEleController.removeRelevance(ele);
+                if (masterController.tableController.allSubElements(t).Count == 0)
+                    { masterController.tableController.removeTable(t); }
                 generateListViewNames(t);
             }
             catch (Exception e)

@@ -9,12 +9,12 @@ WpfMHilfer
 none
 false
 DEBUG;TRACE
-C:\Users\donghui.he\source\repos\MHilferRepo\GUI\App.xaml
-41023283882
+
+5-1733637998
 2-1632392075
 381736333657
 25-1670590624
-GUI\AddElementWindow.xaml;GUI\SearchResultWindow.xaml;GUI\MainWindow.xaml;GUI\styles.xaml;
+GUI\AddElementWindow.xaml;GUI\App.xaml;GUI\SearchResultWindow.xaml;GUI\MainWindow.xaml;GUI\styles.xaml;
 
-False
+True
 

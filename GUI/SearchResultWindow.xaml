@@ -42,8 +42,14 @@
                      x:Name="SearchItem"
                      HorizontalAlignment="Center"
                      MinWidth="200"
-                     materialDesign:HintAssist.Hint="new Search"></TextBox>
-            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" 
+                     materialDesign:HintAssist.Hint="new Search">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchResultButtonCommand, Mode=OneWay}" CommandParameter="{Binding Path=Text, ElementName=SearchItem}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}"
+                    Command="{Binding SearchResultButtonCommand}"
+                    CommandParameter="{Binding Path=Text, ElementName=SearchItem}"
                         HorizontalAlignment="Right"
                         Margin="0,7,16,-20" Height="Auto">
                 <materialDesign:PackIcon Kind="FileFind" />

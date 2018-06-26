@@ -138,9 +138,10 @@
                                         </Button.InputBindings>
                                         <Button.ContextMenu>
                                             <ContextMenu >
-                                                <MenuItem Header="Shift"
+                                                <!--<MenuItem Header="Shift"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.ShiftCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                           CommandParameter="{Binding Path=PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"/>
+                                                -->
                                                 <MenuItem Header= "Delete"
                                                           Command="{Binding Path=PlacementTarget.Tag.DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                           CommandParameter="{Binding Path=PlacementTarget,RelativeSource={RelativeSource AncestorType=ContextMenu}  }" />

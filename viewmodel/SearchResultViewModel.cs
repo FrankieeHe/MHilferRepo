@@ -13,6 +13,16 @@ namespace WpfMHilfer.viewmodel
         private MasterController masterController;
         public string searchItem { get { return _searchItem; } set { this._searchItem = value; this.OnPropertyChanged("searchItem"); } }
 
+        public ICommand SearchResultButtonCommand
+        {
+            get { return new RelayCommand<string>(SearchResultButtonCommanAction); }
+        }
+
+        private void SearchResultButtonCommanAction(string obj)
+        {
+            this.searchDict=  masterController.searchController.searchProcedure(obj, masterController.hilfer.elements);
+        }
+
         public SearchResultViewModel(string sitem, Dictionary<Element, int> keyValuePairs)
         {
             searchItem = sitem;
